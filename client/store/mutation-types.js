@@ -1,0 +1,7 @@
+export const SET_RECENT_TRACKS = 'SET_RECENT_TRACKS'
+
+export const SET_UI_LOADING = 'SET_UI_LOADING'
+
+export const SET_UI_ERROR = 'SET_UI_ERROR'
+
+export const SET_AUTHENTICATION = 'SET_AUTHENTICATION'
