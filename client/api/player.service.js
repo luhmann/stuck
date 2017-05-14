@@ -9,7 +9,7 @@ const api = {
       const recentTracks = await spotifyResource.getRecentTracks()
       return recentTracks.items
     } catch (error) {
-      logger.error(error)
+      logger.error(error, error.response, error.config)
       uiSetError()
     }
   }

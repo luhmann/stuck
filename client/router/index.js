@@ -18,7 +18,6 @@ const router = new Router({
       component: Home,
       beforeEnter: (to, from, next) => {
         if (!store.getters.isAuthenticated) {
-          console.log('Not authenticated ... Redirecting', store)
           next('/authenticate')
         } else {
           next()
@@ -36,7 +35,7 @@ const router = new Router({
       beforeEnter: (to, from, next) => {
         if (to.hash) {
           const parsed = qs.parse(to.hash)
-          appSetAuthorized(parsed.access_token, parsed.expires_in, +Date.now())
+          appSetAuthorized(parsed.access_token, +Date.now() + parseInt(parsed.expires_in, 10) * 1000, +Date.now())
           next('/')
         }
       }
@@ -47,7 +46,7 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(to, from, store.getters.isAuthenticated)
+  // console.log(to, from, store.getters.isAuthenticated)
   next()
 })
 

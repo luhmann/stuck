@@ -5,6 +5,7 @@ import createPersistedState from 'vuex-persistedstate'
 
 import {
   SET_AUTHENTICATION,
+  RESET_AUTHENTICATION,
   SET_UI_ERROR,
   SET_UI_LOADING,
   SET_RECENT_TRACKS
@@ -19,14 +20,16 @@ Vue.use(Vuex)
 const state = {
   authentication: {
     authenticated: false,
+    authenticatedBefore: false,
     token: null,
     expires: null,
     requestedAt: null
   },
   spotify: {
     recentTracks: {
-      loaded: false,
-      items: []
+      expires: null,
+      items: [],
+      loaded: false
     }
   },
   ui: {
@@ -45,9 +48,13 @@ const getters = {
 const mutations = {
   [SET_AUTHENTICATION] ({ authentication }, payload) {
     authentication.authenticated = true
+    authentication.authenticatedBefore = true
     authentication.token = payload.token
     authentication.expires = payload.expires
     authentication.requestedAt = payload.requestedAt
+  },
+  [RESET_AUTHENTICATION] ({ authentication }) {
+    authentication.authenticated = false
   },
   [SET_UI_LOADING] ({ ui }, payload) {
     ui.isLoading = payload
@@ -58,6 +65,7 @@ const mutations = {
   [SET_RECENT_TRACKS] ({ spotify }, payload) {
     spotify.recentTracks.items = payload
     spotify.recentTracks.loaded = true
+    spotify.recentTracks.expires = +Date.now() + 3600 * 1000 // expires in 1 minute
   }
 }
 

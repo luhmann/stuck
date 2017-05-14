@@ -1,5 +1,10 @@
 import store from './'
-import { SET_UI_ERROR, SET_UI_LOADING, SET_AUTHENTICATION } from './mutation-types'
+import {
+  SET_UI_ERROR,
+  SET_UI_LOADING,
+  SET_AUTHENTICATION,
+  RESET_AUTHENTICATION
+} from './mutation-types'
 
 const uiStartLoading = () => {
   store.commit(SET_UI_LOADING, true)
@@ -25,8 +30,13 @@ const appSetAuthorized = (token, expires, requestedAt) => {
   })
 }
 
+const appResetAuthorized = () => {
+  store.commit(RESET_AUTHENTICATION)
+}
+
 export {
   appSetAuthorized,
+  appResetAuthorized,
   uiStartLoading,
   uiStopLoading,
   uiSetError,
