@@ -1,8 +1,10 @@
 <template>
-  <div>{{ artistDisplayString }} – {{ name }} @ {{ dateDisplayString }}</div>
+  <div>{{ artistDisplayString }} – {{ name }} - {{ dateDisplayString }}</div>
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   props: [
     'artists',
@@ -14,7 +16,7 @@ export default {
       return this.artists.map(artist => artist.name).join(', ')
     },
     dateDisplayString () {
-      return new Date(this.date).toLocaleString()
+      return moment(this.date).fromNow()
     }
   }
 }
