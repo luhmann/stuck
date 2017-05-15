@@ -4,6 +4,7 @@
       v-for="track in tracks"
       :key="track.id"
       :artists="track.artists"
+      :image="getImageForArtist(track.artists[0].id)"
       :name="track.name"
       :date="track.date"
     ></spotify-track>
@@ -27,7 +28,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ tracks: 'recentTracks' })
+    ...mapGetters({
+      tracks: 'recentTracks',
+      getImageForArtist: 'imageForArtist'
+    })
   },
   methods: {
     requestRecentTracks: function () {
@@ -37,6 +41,8 @@ export default {
 }
 </script>
 
-<style lang="postcss" scoped>
-
+<style scoped>
+  main {
+    overflow: hidden;
+  }
 </style>

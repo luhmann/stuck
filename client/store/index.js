@@ -56,7 +56,8 @@ const getters = {
   recentTracks: ({ spotify }) => mapTracks(spotify.recentTracks.items),
   artistsOfRecentTracks: ({ spotify }, getters) =>
     mapTracksToArtistIds(getters.recentTracks),
-  isLoading: ({ ui }) => ui.isLoading
+  isLoading: ({ ui }) => ui.isLoading,
+  imageForArtist: ({ spotify }) => (artistId) => (spotify.artists[artistId].images[0])
 }
 
 const mutations = {
