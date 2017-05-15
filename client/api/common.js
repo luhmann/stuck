@@ -1,6 +1,8 @@
 import axios from 'axios'
 import store from '../store/'
-import { appResetAuthorized } from '../store/common'
+
+import * as logger from 'lib/logger'
+import { appResetAuthorized, uiSetError } from '../store/common'
 
 const spotifyEndpoint = axios.create({
   baseURL: `https://api.spotify.com/v1/`,
@@ -20,6 +22,9 @@ spotifyEndpoint.interceptors.response.use(undefined, error => {
   if (error.response.status === 401) {
     appResetAuthorized()
   }
+
+  logger.error(error, error.response, error.config)
+  uiSetError()
 
   return Promise.reject(error)
 })

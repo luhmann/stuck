@@ -13,3 +13,5 @@ export const AUTHORIZATION_BASE_URL = `https://accounts.spotify.com/authorize`
 
 export const getAuthorizationUrl = state =>
   `${AUTHORIZATION_BASE_URL}?${qs.stringify(Object.assign({}, authorizationParams, { state }))}`
+
+export const ARTIST_INFO_URL = '/artists'

@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 const mapArtist = (artist) => ({
   id: artist.id,
   name: artist.name,
@@ -13,7 +15,28 @@ const mapTracks = (tracks) => (
   }))
 )
 
+const mapArtistToId = artist => artist.id
+
+const mapTracksToArtistIds = (tracks) => (
+  tracks.reduce((prev, item) => [...prev, ...item.artists.map(mapArtistToId)], [])
+)
+
+const filterIsFresh = item => moment(item.expires).isAfter()
+
+const reduceToKeyedArtists = artists => (
+  artists.reduce((prev, artist) => {
+    const artistWithExpiration = Object.assign({}, artist, { expires: moment().add(1, 'day').valueOf() })
+    return Object.assign({}, prev, { [artist.id]: artistWithExpiration })
+  },
+    {}
+  )
+)
+
 export {
+  filterIsFresh,
   mapArtist,
-  mapTracks
+  mapTracks,
+  mapArtistToId,
+  mapTracksToArtistIds,
+  reduceToKeyedArtists
 }
