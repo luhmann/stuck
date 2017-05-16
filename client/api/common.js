@@ -1,4 +1,6 @@
 import axios from 'axios'
+import router from '../router/'
+import { ROUTE_AUTHENTICATE } from '../router/route-names'
 import store from '../store/'
 
 import * as logger from 'lib/logger'
@@ -21,6 +23,7 @@ spotifyEndpoint.interceptors.request.use((config) => {
 spotifyEndpoint.interceptors.response.use(undefined, error => {
   if (error.response.status === 401) {
     appResetAuthorized()
+    router.push({ name: ROUTE_AUTHENTICATE })
   }
 
   logger.error(error, error.response, error.config)

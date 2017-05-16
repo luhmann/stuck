@@ -4,6 +4,7 @@ import qs from 'query-string'
 
 import store from '../store/'
 import { appSetAuthorized } from '../store/common'
+import { ROUTE_DEFAULT, ROUTE_AUTHENTICATE, ROUTE_AUTHENTICATED } from './route-names'
 
 import Authentication from '../views/Authentication'
 import Home from '../views/Home'
@@ -16,6 +17,7 @@ const router = new Router({
     {
       path: '/',
       component: Home,
+      name: ROUTE_DEFAULT,
       beforeEnter: (to, from, next) => {
         if (!store.getters.isAuthenticated) {
           next('/authenticate')
@@ -25,12 +27,12 @@ const router = new Router({
       }
     },
     {
-      name: 'authenticate',
+      name: ROUTE_AUTHENTICATE,
       path: '/authenticate',
       component: Authentication
     },
     {
-      name: 'authenticated',
+      name: ROUTE_AUTHENTICATED,
       path: '/authenticated',
       beforeEnter: (to, from, next) => {
         if (to.hash) {
