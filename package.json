@@ -59,6 +59,7 @@
     "vue-loader": "^11.0.0",
     "vue-svgicon": "^1.1.8",
     "vue-template-compiler": "^2.2.0",
+    "vue-touch-easyhi": "^2.0.0",
     "vuex-persistedstate": "^1.4.1",
     "webpack": "2.2.0",
     "webpack-dev-middleware": "^1.8.1",

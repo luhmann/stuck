@@ -8,7 +8,9 @@
       :image="getImageForArtist(track.artists[0].id)"
       :name="track.name"
       :date="track.date"
+      :previewUrl="track.previewUrl"
     ></spotify-track>
+    <audio-preview />
   </main>
 
 </template>
@@ -17,10 +19,12 @@
 import { mapGetters } from 'vuex'
 import { REQUEST_RECENT_TRACKS } from '../store/action-types.js'
 
+import AudioPreview from 'components/AudioPreview'
 import SpotifyTrack from 'components/SpotifyTrack'
 
 export default {
   components: {
+    AudioPreview,
     SpotifyTrack
   },
   created: function () {

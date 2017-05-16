@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
 import svgicon from 'vue-svgicon'
+import VueTouch from 'vue-touch-easyhi'
 
 import App from './components/App'
 import router from './router'
@@ -18,6 +19,8 @@ if (isDev()) {
 Vue.use(svgicon, {
   tagName: 'svgicon'
 })
+
+Vue.use(VueTouch)
 
 const app = new Vue({
   router,

@@ -6,7 +6,7 @@
       @click="removeTrack(id)"
     >
       <svgicon class="library-action__icon--added" icon="added" width="20" height="20" />
-      <svgicon class="library-action__icon--delete" icon="delete" width="20" height="20" />
+      <svgicon class="library-action__icon--delete" icon="delete" width="18" height="18" />
     </button>
     <button
       class="library-action library-action--add"

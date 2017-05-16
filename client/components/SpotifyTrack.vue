@@ -1,5 +1,12 @@
 <template>
-  <div class="track" >
+  <div
+    class="track"
+    title="Press & hold to listen to track"
+    v-touch:press="playPreviewAudio"
+    v-touch:pressup="stopPreviewAudio"
+    @mousedown="playPreviewAudio"
+    @mouseup="stopPreviewAudio"
+  >
     <LibraryButton :id="id" />
     <img class="track__img" :src="imageUrl" v-if="imageUrl" :title="id" />
     <div class="track__img-placeholder" v-else></div>
@@ -8,12 +15,16 @@
       <div class="track__artist" :title="artistDisplayString">{{ artistDisplayString }}</div>
     </div>
     <div class="track__played-at" :title="dateDisplayString">{{ dateDisplayString }}</div>
+    <sound-animation v-if="isPlaying" />
   </div>
 </template>
 
 <script>
 import moment from 'moment'
+
 import LibraryButton from 'components/LibraryButton'
+import SoundAnimation from 'components/SoundAnimation'
+import { SET_UI_CURRENTLY_PLAYING_TRACK } from '../store/mutation-types.js'
 
 export default {
   props: [
@@ -21,21 +32,37 @@ export default {
     'image',
     'artists',
     'name',
-    'date'
+    'date',
+    'previewUrl'
   ],
   components: {
-    LibraryButton
+    LibraryButton,
+    SoundAnimation
   },
   computed: {
     artistDisplayString () {
       return this.artists.map(artist => artist.name).join(', ')
     },
     dateDisplayString () {
-      return moment(this.date).fromNow()
+      return moment(this.date).fromNow(true)
     },
     imageUrl () {
       const imageUrl = this.image && this.image.url || ''
       return imageUrl
+    },
+    isPlaying () {
+      return this.$store.state.ui.currentTrack && this.$store.state.ui.currentTrack.id === this.id
+    }
+  },
+  methods: {
+    playPreviewAudio () {
+      this.$store.commit(SET_UI_CURRENTLY_PLAYING_TRACK, {
+        id: this.id,
+        previewUrl: this.previewUrl
+      })
+    },
+    stopPreviewAudio () {
+      this.$store.commit(SET_UI_CURRENTLY_PLAYING_TRACK, null)
     }
   }
 }
@@ -45,6 +72,7 @@ export default {
   .track {
     align-items: center;
     border-bottom: 1px solid var(--color-separator);
+    cursor: pointer;
     display: grid;
     grid-template-columns: 0.5fr calc(13 * var(--grid-column-size)) 5fr 1fr;
     grid-gap: calc(2 * var(--grid-column-size));
@@ -74,6 +102,10 @@ export default {
 
   .track__artist {
     color: var(--color-artist);
+  }
+
+  .track__played-at {
+    text-align: right;
   }
 
 </style>

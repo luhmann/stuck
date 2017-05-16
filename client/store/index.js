@@ -12,7 +12,8 @@ import {
   ADD_ARTISTS_INFO,
   SET_ARTISTS_INFO,
   ADD_LIBRARY_CONTAINS_INFO,
-  SET_LIBRARY_CONTAINS_INFO
+  SET_LIBRARY_CONTAINS_INFO,
+  SET_UI_CURRENTLY_PLAYING_TRACK
 } from './mutation-types'
 import {
   REQUEST_RECENT_TRACKS,
@@ -59,7 +60,8 @@ const state = {
   },
   ui: {
     isLoading: false,
-    hasError: false
+    hasError: false,
+    currentTrack: null
   }
 }
 
@@ -72,7 +74,7 @@ const getters = {
   isLoading: ({ ui }) => ui.isLoading,
   isTrackInLibrary: ({ spotify }) => trackId => !!spotify.library.savedTracks[trackId],
   imageForArtist: ({ spotify }) => artistId =>
-    spotify.artists[artistId].images[1] // TODO: Find something smarter
+    spotify.artists[artistId] && spotify.artists[artistId].images[1] // TODO: Find something smarter
 }
 
 const mutations = {
@@ -108,6 +110,9 @@ const mutations = {
   },
   [SET_LIBRARY_CONTAINS_INFO] ({ spotify }, payload) {
     spotify.library.savedTracks[payload.id] = payload.value
+  },
+  [SET_UI_CURRENTLY_PLAYING_TRACK] ({ ui }, payload) {
+    ui.currentTrack = payload
   }
 }
 
