@@ -1,13 +1,12 @@
 <template>
   <div class="track" >
-    <div class="track__background-img" :style="`background-image: url(${imageUrl})`"></div>
-    <div class="track__shim"></div>
+    <img class="track__img" :src="imageUrl" v-if="imageUrl" />
+    <div class="track__img" v-else></div>
     <div class="track__info">
-      <img class="track__img" :src="imageUrl" />
-      <div class="track__title">{{ name }}</div>
-      <div class="track__artist">{{ artistDisplayString }}</div>
-      <div class="track__played_at">{{ dateDisplayString }}</div>
+      <div class="track__title" :title="name">{{ name }}</div>
+      <div class="track__artist" :title="artistDisplayString">{{ artistDisplayString }}</div>
     </div>
+    <div class="track__played-at" :title="dateDisplayString">{{ dateDisplayString }}</div>
   </div>
 </template>
 
@@ -38,47 +37,37 @@ export default {
 
 <style scoped>
   .track {
-    border-bottom: 1px solid #282828;
-    padding: 16px 24px;
+    align-items: center;
+    border-bottom: 1px solid var(--color-separator);
+    display: grid;
+    grid-template-columns: calc(13 * var(--grid-column-size)) 5fr 1fr;
+    grid-gap: calc(2 * var(--grid-column-size));
+    padding: calc(2 * var(--grid-column-size)) calc(3 * var(--grid-column-size));;
     position: relative;
     overflow: hidden;
   }
 
-  .track__background-img {
-    background: transparent none center center no-repeat;
-    background-size: cover;
-    filter: blur(8px);
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-  }
-
-  .track__shim {
-    background-color: rgba(0, 0, 0, 0.7);
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-
   .track__img {
-    height: 100px;
+    height: calc(13 * var(--grid-column-size));
     object-fit: cover;
-    width: 100px;
+    width: calc(13 * var(--grid-column-size));
   }
 
-  .track__info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  .track__img, .track__title, .track__artist, .track__played-at {
+    max-width: calc(82 * var(--grid-column-size));
     position: relative;
     z-index: 10;
+    text-overflow: ellipsis;
+  	white-space: nowrap;
+  	overflow: hidden;
   }
 
   .track__title {
-    /*flex-grow: 1;*/
+    margin-bottom: calc(0.5 * var(--grid-column-size));
   }
+
+  .track__artist {
+    color: var(--color-artist);
+  }
+
 </style>
