@@ -10,11 +10,20 @@ import {
   SET_UI_LOADING,
   SET_RECENT_TRACKS,
   ADD_ARTISTS_INFO,
-  SET_ARTISTS_INFO
+  SET_ARTISTS_INFO,
+  ADD_LIBRARY_CONTAINS_INFO,
+  SET_LIBRARY_CONTAINS_INFO
 } from './mutation-types'
-import { REQUEST_RECENT_TRACKS, REQUEST_ARTIST_INFO } from './action-types'
+import {
+  REQUEST_RECENT_TRACKS,
+  REQUEST_ARTIST_INFO,
+  REQUEST_LIBRARY_CONTAINS,
+  SAVE_TRACK_TO_LIBRARY,
+  REMOVE_TRACK_FROM_LIBRARY
+} from './action-types'
 import artistsResource from '../api/artists.resource'
 import playerResource from '../api/player.resource'
+import libraryResource from '../api/library.resource'
 
 import { isDev } from 'lib/env'
 import * as logger from 'lib/logger'
@@ -23,6 +32,7 @@ import {
   mapTracks,
   mapTracksToArtistIds,
   reduceToKeyedArtists,
+  reduceTracksContainedInLibrary,
   filterIsFresh
 } from '../api/mapper'
 
@@ -42,7 +52,10 @@ const state = {
       items: [],
       loaded: false
     },
-    artists: {}
+    artists: {},
+    library: {
+      savedTracks: {}
+    }
   },
   ui: {
     isLoading: false,
@@ -57,7 +70,9 @@ const getters = {
   artistsOfRecentTracks: ({ spotify }, getters) =>
     mapTracksToArtistIds(getters.recentTracks),
   isLoading: ({ ui }) => ui.isLoading,
-  imageForArtist: ({ spotify }) => (artistId) => (spotify.artists[artistId].images[0])
+  isTrackInLibrary: ({ spotify }) => trackId => !!spotify.library.savedTracks[trackId],
+  imageForArtist: ({ spotify }) => artistId =>
+    spotify.artists[artistId].images[1] // TODO: Find something smarter
 }
 
 const mutations = {
@@ -87,6 +102,12 @@ const mutations = {
   },
   [ADD_ARTISTS_INFO] ({ spotify }, payload) {
     spotify.artists = Object.assign({}, spotify.artists, payload)
+  },
+  [ADD_LIBRARY_CONTAINS_INFO] ({ spotify }, payload) {
+    spotify.library.savedTracks = Object.assign({}, spotify.library.savedTracks, payload)
+  },
+  [SET_LIBRARY_CONTAINS_INFO] ({ spotify }, payload) {
+    spotify.library.savedTracks[payload.id] = payload.value
   }
 }
 
@@ -96,18 +117,47 @@ const actions = {
     playerResource.getRecentTracks().then(recentTracks => {
       commit(SET_RECENT_TRACKS, recentTracks.items)
       dispatch(REQUEST_ARTIST_INFO, getters.artistsOfRecentTracks)
+      dispatch(REQUEST_LIBRARY_CONTAINS, getters.recentTracks.map(track => track.id))
       uiStopLoading()
     })
   },
   [REQUEST_ARTIST_INFO] ({ commit, getters, state }, artistsIds) {
     artistsResource
       .getArtistsInfo(
-        artistsIds.filter(id => !state.spotify.artists[id] || !filterIsFresh(state.spotify.artists[id]))
+        artistsIds.filter(
+          id =>
+            !state.spotify.artists[id] ||
+            !filterIsFresh(state.spotify.artists[id])
+        )
       )
       .then(response => {
         commit(ADD_ARTISTS_INFO, reduceToKeyedArtists(response.artists))
       })
-      .catch(data => { logger.info('Could not request artist info:', data.error) })
+      .catch(data => {
+        logger.info('Could not request artist info:', data.error)
+      })
+  },
+  [REQUEST_LIBRARY_CONTAINS] ({ commit, getters }, trackIds) {
+    libraryResource.checkLibraryContains(trackIds).then(response => {
+      commit(ADD_LIBRARY_CONTAINS_INFO, reduceTracksContainedInLibrary(trackIds, response))
+    })
+  },
+  [SAVE_TRACK_TO_LIBRARY] ({ commit }, trackId) {
+    libraryResource.saveTracksToLibrary([trackId]).then(() => {
+      commit(SET_LIBRARY_CONTAINS_INFO, {
+        id: trackId,
+        value: true
+      })
+    })
+  },
+  [REMOVE_TRACK_FROM_LIBRARY] ({ commit }, trackId) {
+    console.log(trackId)
+    libraryResource.removeTracksFromLibrary([trackId]).then(() => {
+      commit(SET_LIBRARY_CONTAINS_INFO, {
+        id: trackId,
+        value: false
+      })
+    })
   }
 }
 

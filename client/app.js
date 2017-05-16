@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
+import svgicon from 'vue-svgicon'
 
 import App from './components/App'
 import router from './router'
@@ -13,6 +14,10 @@ if (isDev()) {
   window.store = store
   window.storeActions = storeActions
 }
+
+Vue.use(svgicon, {
+  tagName: 'svgicon'
+})
 
 const app = new Vue({
   router,

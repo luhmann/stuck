@@ -4,14 +4,20 @@
   </div>
 </template>
 
-<style>
+<style lang="postcss">
 :root {
   --color-text: rgb(255, 255, 255);
   --color-artist: rgb(160, 160, 160);
   --color-bg: rgb(40, 40, 40);
   --color-separator: rgb(83, 83, 83);
+  --color-spotify: rgb(30, 215, 96);
 
   --grid-column-size: 8px;
+}
+
+
+html[data-whatinput="mouse"] :focus {
+    outline: none;
 }
 
 body {

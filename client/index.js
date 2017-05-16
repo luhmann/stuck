@@ -1,3 +1,4 @@
+require('what-input')
 import './promise-polyfill'
 import { isProd } from 'lib/env'
 import { app } from './app'

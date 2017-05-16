@@ -19,6 +19,11 @@ import { mapState } from 'vuex'
 import { getAuthorizationUrl } from '../api/urls'
 
 export default {
+  created () {
+    if (this.userAuthenticatedBefore) {
+      window.location.replace(this.authorizationUrl)
+    }
+  },
   computed: {
     authorizationUrl () {
       return getAuthorizationUrl('demo-demo-demo')

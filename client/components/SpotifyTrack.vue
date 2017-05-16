@@ -1,7 +1,8 @@
 <template>
   <div class="track" >
-    <img class="track__img" :src="imageUrl" v-if="imageUrl" />
-    <div class="track__img" v-else></div>
+    <LibraryButton :id="id" />
+    <img class="track__img" :src="imageUrl" v-if="imageUrl" :title="id" />
+    <div class="track__img-placeholder" v-else></div>
     <div class="track__info">
       <div class="track__title" :title="name">{{ name }}</div>
       <div class="track__artist" :title="artistDisplayString">{{ artistDisplayString }}</div>
@@ -12,14 +13,19 @@
 
 <script>
 import moment from 'moment'
+import LibraryButton from 'components/LibraryButton'
 
 export default {
   props: [
+    'id',
     'image',
     'artists',
     'name',
     'date'
   ],
+  components: {
+    LibraryButton
+  },
   computed: {
     artistDisplayString () {
       return this.artists.map(artist => artist.name).join(', ')
@@ -40,14 +46,14 @@ export default {
     align-items: center;
     border-bottom: 1px solid var(--color-separator);
     display: grid;
-    grid-template-columns: calc(13 * var(--grid-column-size)) 5fr 1fr;
+    grid-template-columns: 0.5fr calc(13 * var(--grid-column-size)) 5fr 1fr;
     grid-gap: calc(2 * var(--grid-column-size));
     padding: calc(2 * var(--grid-column-size)) calc(3 * var(--grid-column-size));;
     position: relative;
     overflow: hidden;
   }
 
-  .track__img {
+  .track__img, .track__img-placeholder {
     height: calc(13 * var(--grid-column-size));
     object-fit: cover;
     width: calc(13 * var(--grid-column-size));

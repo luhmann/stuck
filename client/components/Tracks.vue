@@ -3,6 +3,7 @@
     <spotify-track
       v-for="track in tracks"
       :key="track.id"
+      :id="track.id"
       :artists="track.artists"
       :image="getImageForArtist(track.artists[0].id)"
       :name="track.name"
