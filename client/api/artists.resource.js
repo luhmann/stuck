@@ -1,28 +1,25 @@
-import { spotifyEndpoint } from './common'
+import * as logger from '../lib/logger'
+import spotifyEndpoint from './common'
 import { ARTIST_INFO_URL } from './urls'
-
-import * as logger from 'lib/logger'
 
 const getArtistsInfo = (artistsIds = []) => {
   logger.info('in getArtistInfo, requestedIds:', artistsIds)
 
-  if (artistsIds.length) {
+  if (artistsIds.length > 0) {
     return spotifyEndpoint
       .get(ARTIST_INFO_URL, {
         params: {
-          ids: artistsIds.join(',')
-        }
+          ids: artistsIds.join(','),
+        },
       })
       .then(response => response.data)
-  } else {
-    return Promise.reject({
-      error: { message: 'No valid artist-ids to request' }
-    })
   }
+
+  return Promise.reject(new Error('No valid artist-ids to request'))
 }
 
 const api = {
-  getArtistsInfo
+  getArtistsInfo,
 }
 
 export default Object.freeze(api)

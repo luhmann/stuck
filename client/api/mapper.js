@@ -3,7 +3,7 @@ import moment from 'moment'
 const mapArtist = artist => ({
   id: artist.id,
   name: artist.name,
-  href: artist.href
+  href: artist.href,
 })
 
 const mapTracks = tracks =>
@@ -13,7 +13,7 @@ const mapTracks = tracks =>
     artists: item.track.artists.map(mapArtist),
     images: item.track.album.images,
     previewUrl: item.track.preview_url,
-    name: item.track.name
+    name: item.track.name,
   }))
 
 const mapArtistToId = artist => artist.id
@@ -29,7 +29,7 @@ const filterIsFresh = item => moment(item.expires).isAfter()
 const reduceToKeyedArtists = artists =>
   artists.reduce((prev, artist) => {
     const artistWithExpiration = Object.assign({}, artist, {
-      expires: moment().add(1, 'day').valueOf()
+      expires: moment().add(1, 'day').valueOf(),
     })
     return Object.assign({}, prev, { [artist.id]: artistWithExpiration })
   }, {})
@@ -48,5 +48,5 @@ export {
   mapArtistToId,
   mapTracksToArtistIds,
   reduceToKeyedArtists,
-  reduceTracksContainedInLibrary
+  reduceTracksContainedInLibrary,
 }

@@ -4,10 +4,14 @@ import qs from 'query-string'
 
 import store from '../store/'
 import { appSetAuthorized } from '../store/common'
-import { ROUTE_DEFAULT, ROUTE_AUTHENTICATE, ROUTE_AUTHENTICATED } from './route-names'
-
 import Authentication from '../views/Authentication'
 import Home from '../views/Home'
+
+import {
+  ROUTE_DEFAULT,
+  ROUTE_AUTHENTICATE,
+  ROUTE_AUTHENTICATED,
+} from './route-names'
 
 Vue.use(Router)
 
@@ -19,17 +23,17 @@ const router = new Router({
       component: Home,
       name: ROUTE_DEFAULT,
       beforeEnter: (to, from, next) => {
-        if (!store.getters.isAuthenticated) {
+        if (Boolean(store.getters.isAuthenticated) === false) {
           next('/authenticate')
         } else {
           next()
         }
-      }
+      },
     },
     {
       name: ROUTE_AUTHENTICATE,
       path: '/authenticate',
-      component: Authentication
+      component: Authentication,
     },
     {
       name: ROUTE_AUTHENTICATED,
@@ -37,18 +41,21 @@ const router = new Router({
       beforeEnter: (to, from, next) => {
         if (to.hash) {
           const parsed = qs.parse(to.hash)
-          appSetAuthorized(parsed.access_token, +Date.now() + parseInt(parsed.expires_in, 10) * 1000, +Date.now())
+          appSetAuthorized(
+            parsed.access_token,
+            Number(Date.now()) + parseInt(parsed.expires_in, 10) * 1000,
+            Number(Date.now())
+          )
           next('/')
         }
-      }
+      },
     },
     // TODO: Improve
-    { path: '*', component: Home }
-  ]
+    { path: '*', component: Home },
+  ],
 })
 
 router.beforeEach((to, from, next) => {
-  // console.log(to, from, store.getters.isAuthenticated)
   next()
 })
 

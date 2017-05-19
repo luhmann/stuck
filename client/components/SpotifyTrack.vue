@@ -40,10 +40,10 @@ export default {
     SoundAnimation
   },
   computed: {
-    artistDisplayString () {
+    artistDisplayString() {
       return this.artists.map(artist => artist.name).join(', ')
     },
-    dateDisplayString () {
+    dateDisplayString() {
       return moment(this.date).fromNow(true)
     },
     imageUrl () {

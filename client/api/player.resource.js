@@ -1,15 +1,17 @@
-import { spotifyEndpoint } from './common'
+import spotifyEndpoint from './common'
 import { RECENTLY_PLAYED_URL } from './urls'
 
 const getRecentTracks = () =>
-  spotifyEndpoint.get(RECENTLY_PLAYED_URL, {
-    params: {
-      limit: 40
-    }
-  }).then(response => response.data)
+  spotifyEndpoint
+    .get(RECENTLY_PLAYED_URL, {
+      params: {
+        limit: 40,
+      },
+    })
+    .then(response => response.data)
 
 const api = {
-  getRecentTracks
+  getRecentTracks,
 }
 
 export default Object.freeze(api)

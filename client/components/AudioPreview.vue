@@ -6,7 +6,7 @@ const START_VOLUME = 0
 const TARGET_VOLUME = 1
 
 export default {
-  created () {
+  created() {
     this.audioObject = new Audio()
     this.interval = null
   },
@@ -14,7 +14,7 @@ export default {
     ...mapState({ currentTrack: state => state.ui.currentTrack })
   },
   methods: {
-    fadeIn () {
+    fadeIn() {
       this.audioObject.volume = START_VOLUME
 
       this.interval = setInterval(() => {
@@ -28,7 +28,7 @@ export default {
         }
       }, 100)
     },
-    fadeOut () {
+    fadeOut() {
       this.interval = setInterval(() => {
         const newVolume = this.audioObject.volume - 0.1
 
@@ -41,7 +41,7 @@ export default {
         }
       }, 50)
     },
-    playPreviewAudio () {
+    playPreviewAudio() {
       if (this.audioObject.src !== this.currentTrack.previewUrl) {
         this.audioObject.src = this.currentTrack.previewUrl
         this.fadeIn()
@@ -50,12 +50,12 @@ export default {
       }
       this.audioObject.play()
     },
-    stopPreviewAudio () {
+    stopPreviewAudio() {
       this.fadeOut()
     }
   },
   watch: {
-    currentTrack (val) {
+    currentTrack(val) {
       if (val !== null) {
         this.playPreviewAudio()
       } else {
