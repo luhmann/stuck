@@ -3,8 +3,7 @@ import { sync } from 'vuex-router-sync'
 import svgicon from 'vue-svgicon'
 import VueTouch from 'vue-touch-easyhi'
 
-import { isDev } from '../lib/env'
-
+import { isDev } from './lib/env'
 import App from './components/App'
 import router from './router'
 import store from './store'

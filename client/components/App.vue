@@ -22,6 +22,7 @@ html[data-whatinput="mouse"] :focus {
 
 body {
   background-color: #000;
+  box-sizing: border-box;
   color: var(--color-text);
   margin: 0;
   font-size: 1rem;

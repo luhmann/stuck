@@ -1,5 +1,5 @@
 import './promise-polyfill'
-import { isProd } from '../lib/env'
+import { isProd } from './lib/env'
 import { app } from './app'
 
 require('what-input')
