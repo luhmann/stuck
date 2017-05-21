@@ -9,7 +9,7 @@
     "build": "webpack --config build/webpack.prod.js",
     "dev": "node build/server.js",
     "lint": "xo **/client/**/*.{vue,js} !node_modules/**",
-    "svg": "vsvg -s ./static/icons -t ./client/components/icons",
+    "svg": "vsvg -s ./static/icons -t ./client/components/icons --tpl ./build/svg-icon-template",
     "format": "prettier --write --no-semi --single-quote --trailing-comma es5 'client/**/*.js'"
   },
   "lint-staged": {

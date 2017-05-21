@@ -1,3 +1,5 @@
 require('./add')
 require('./added')
 require('./delete')
+require('./logo')
+require('./ribbon')

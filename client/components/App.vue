@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="page">
     <router-view></router-view>
   </div>
 </template>
@@ -9,8 +9,10 @@
   --color-text: rgb(255, 255, 255);
   --color-artist: rgb(160, 160, 160);
   --color-bg: rgb(40, 40, 40);
+  --color-dark-bg: rgb(25, 25, 25);
   --color-separator: rgb(83, 83, 83);
   --color-spotify: rgb(30, 215, 96);
+  --color-bright-bg: rgb(249, 249, 249);
 
   --grid-column-size: 8px;
 }

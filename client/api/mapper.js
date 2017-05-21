@@ -14,6 +14,7 @@ const mapTracks = tracks =>
     images: item.track.album.images,
     previewUrl: item.track.preview_url,
     name: item.track.name,
+    externalUrl: item.track.external_urls.spotify,
   }))
 
 const mapArtistToId = artist => artist.id
@@ -31,13 +32,17 @@ const reduceToKeyedArtists = artists =>
     const artistWithExpiration = Object.assign({}, artist, {
       expires: moment().add(1, 'day').valueOf(),
     })
-    return Object.assign({}, prev, { [artist.id]: artistWithExpiration })
+    return Object.assign({}, prev, {
+      [artist.id]: artistWithExpiration,
+    })
   }, {})
 
 const reduceTracksContainedInLibrary = (trackIds, containsInfo) =>
   trackIds.reduce(
     (prev, curr, index) =>
-      Object.assign({}, prev, { [trackIds[index]]: containsInfo[index] }),
+      Object.assign({}, prev, {
+        [trackIds[index]]: containsInfo[index],
+      }),
     {}
   )
 

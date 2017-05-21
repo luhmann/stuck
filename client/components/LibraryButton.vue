@@ -5,7 +5,7 @@
       <svgicon class="library-action__icon--delete" icon="delete" width="18" height="18" />
     </button>
     <button class="library-action library-action--add" title="Save to your music library" v-else @click="saveTrack(id)">
-      <svgicon icon="add" color="#fff" width="20" height="20" />
+      <svgicon icon="add" color="#fff" width="21" height="21" />
     </button>
   </div>
 </template>
@@ -39,7 +39,7 @@ export default {
     cursor: pointer;
     border: none;
     height: calc(3 * var(--grid-column-size));
-    padding: 0;
+    padding: 0 0 0 calc(1 * var(--grid-column-size));
     width: calc(3 * var(--grid-column-size));
 
     &--added svg {

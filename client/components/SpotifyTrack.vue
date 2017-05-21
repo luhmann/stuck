@@ -13,6 +13,7 @@
     <div class="track__info">
       <div class="track__title" :title="name">{{ name }}</div>
       <div class="track__artist" :title="artistDisplayString">{{ artistDisplayString }}</div>
+      <a class="track__link" :href="externalUrl" target="_blank">View in Spotify</a>
     </div>
     <div class="track__played-at" :title="dateDisplayString">{{ dateDisplayString }}</div>
     <sound-animation v-if="isPlaying" />
@@ -33,7 +34,8 @@ export default {
     'artists',
     'name',
     'date',
-    'previewUrl'
+    'previewUrl',
+    'externalUrl'
   ],
   components: {
     LibraryButton,
@@ -68,26 +70,26 @@ export default {
 }
 </script>
 
-<style scoped>
-  .track {
-    align-items: center;
-    border-bottom: 1px solid var(--color-separator);
-    cursor: pointer;
-    display: grid;
-    grid-template-columns: 0.5fr calc(13 * var(--grid-column-size)) 5fr 1fr;
-    grid-gap: calc(2 * var(--grid-column-size));
-    padding: calc(2 * var(--grid-column-size)) calc(3 * var(--grid-column-size));;
-    position: relative;
-    overflow: hidden;
-  }
+<style lang="postcss" scoped>
+.track {
+  align-items: center;
+  border-bottom: 1px solid var(--color-separator);
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 0.5fr calc(13 * var(--grid-column-size)) 5fr 1fr;
+  grid-gap: calc(2 * var(--grid-column-size));
+  padding: calc(2 * var(--grid-column-size)) calc(3 * var(--grid-column-size));;
+  position: relative;
+  overflow: hidden;
 
-  .track__img, .track__img-placeholder {
+
+  &__img, &__img-placeholder {
     height: calc(13 * var(--grid-column-size));
     object-fit: cover;
     width: calc(13 * var(--grid-column-size));
   }
 
-  .track__img, .track__title, .track__artist, .track__played-at {
+  &__img, &__title, &__artist, &__played-at {
     max-width: calc(82 * var(--grid-column-size));
     position: relative;
     z-index: 10;
@@ -96,16 +98,24 @@ export default {
   	overflow: hidden;
   }
 
-  .track__title {
+  &__title {
     margin-bottom: calc(0.5 * var(--grid-column-size));
   }
 
-  .track__artist {
+  &__artist {
     color: var(--color-artist);
   }
 
-  .track__played-at {
+  &__played-at {
     text-align: right;
   }
 
+  &__link {
+    border-bottom: 1px solid;
+    color: var(--color-artist);
+    font-size: 12px;
+    text-decoration: none;
+    padding-bottom: 2px;
+  }
+}
 </style>

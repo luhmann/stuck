@@ -9,6 +9,7 @@
       :name="track.name"
       :date="track.date"
       :previewUrl="track.previewUrl"
+      :externalUrl="track.externalUrl"
     ></spotify-track>
     <audio-preview />
   </main>
