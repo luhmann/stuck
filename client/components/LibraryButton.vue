@@ -5,7 +5,7 @@
       <svgicon class="library-action__icon--delete" icon="delete" width="18" height="18" />
     </button>
     <button class="library-action library-action--add" title="Save to your music library" v-else @click="saveTrack(id)">
-      <svgicon icon="add" color="#fff" width="21" height="21" />
+      <svgicon icon="add" color="#fff" width="100%" height="100%" />
     </button>
   </div>
 </template>
@@ -35,12 +35,14 @@ export default {
 
 <style lang="postcss" scoped>
   .library-action {
+    align-self: center;
     background-color: transparent;
     cursor: pointer;
     border: none;
-    height: calc(3 * var(--grid-column-size));
-    padding: 0 0 0 calc(1 * var(--grid-column-size));
-    width: calc(3 * var(--grid-column-size));
+    height: var(--grid-cols-3);
+    justify-self: center;
+    padding: 0;
+    width: var(--grid-cols-3);
 
     &--added svg {
       fill: var(--color-spotify);

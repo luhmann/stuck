@@ -76,38 +76,43 @@ export default {
   border-bottom: 1px solid var(--color-separator);
   cursor: pointer;
   display: grid;
-  grid-template-columns: 0.5fr calc(13 * var(--grid-column-size)) 5fr 1fr;
-  grid-gap: calc(2 * var(--grid-column-size));
-  padding: calc(2 * var(--grid-column-size)) calc(3 * var(--grid-column-size));;
-  position: relative;
+  grid-template-columns: min-content min-content 48vw 1fr;
+  grid-gap: var(--grid-cols-1);
   overflow: hidden;
+  padding: var(--grid-cols-2) var(--grid-cols-1);
+  position: relative;
 
-
-  &__img, &__img-placeholder {
-    height: calc(13 * var(--grid-column-size));
-    object-fit: cover;
-    width: calc(13 * var(--grid-column-size));
+  @media screen and (min-width: 768px) {
+    grid-gap: var(--grid-cols-2);
   }
 
+
   &__img, &__title, &__artist, &__played-at {
-    max-width: calc(82 * var(--grid-column-size));
     position: relative;
-    z-index: 10;
-    text-overflow: ellipsis;
-  	white-space: nowrap;
-  	overflow: hidden;
+    @util truncate;
+  }
+
+  &__img, &__img-placeholder {
+    max-height: calc(13 * var(--grid-column-size));
+    object-fit: cover;
+    max-width: calc(13 * var(--grid-column-size));
+    height: 20vw;
+    width: 20vw;
   }
 
   &__title {
     margin-bottom: calc(0.5 * var(--grid-column-size));
+    max-width: calc(82 * var(--grid-column-size));
   }
 
   &__artist {
     color: var(--color-artist);
+    max-width: calc(82 * var(--grid-column-size));
   }
 
   &__played-at {
     text-align: right;
+    max-width: calc(82 * var(--grid-column-size));
   }
 
   &__link {
@@ -116,6 +121,7 @@ export default {
     font-size: 12px;
     text-decoration: none;
     padding-bottom: 2px;
+    max-width: calc(82 * var(--grid-column-size));
   }
 }
 </style>

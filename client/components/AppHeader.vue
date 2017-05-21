@@ -14,15 +14,22 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="postcss" scoped>
 .container {
   align-items: center;
   background-color: var(--color-dark-bg);
   color: white;
   display: grid;
   grid-template-columns: 50px 1fr 40px;
-  padding: calc(2 * var(--grid-column-size)) calc(3 * var(--grid-column-size));
-  padding-left: calc(2.5 * var(--grid-column-size));
+  padding: var(--grid-cols-2) var(--grid-cols-1);
+  padding-left: 0;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-medium);
+
+  @media (min-width: 768px) {
+    padding: var(--grid-cols-2) var(--grid-cols-3);
+  }
 }
 
 .spotify-icon {

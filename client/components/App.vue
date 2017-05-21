@@ -15,6 +15,14 @@
   --color-bright-bg: rgb(249, 249, 249);
 
   --grid-column-size: 8px;
+  --grid-cols-1: calc(1 * var(--grid-column-size));
+  --grid-cols-2: calc(2 * var(--grid-column-size));
+  --grid-cols-3: calc(3 * var(--grid-column-size));
+
+  --mq-tablet: 768px;
+
+  --z-index-low: 1;
+  --z-index-medium: 10;
 }
 
 

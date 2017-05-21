@@ -50,5 +50,7 @@ export default {
 <style scoped>
   main {
     overflow: hidden;
+    position: relative;
+    z-index: var(--z-index-low);
   }
 </style>
