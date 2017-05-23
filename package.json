@@ -64,6 +64,7 @@
     "lint-staged": "^3.4.2",
     "nodemon": "^1.11.0",
     "offline-plugin": "^4.5.3",
+    "postcss-custom-media": "^6.0.0",
     "postcss-loader": "^0.9.1",
     "postcss-nested": "^1.0.0",
     "postcss-utilities": "^0.7.0",

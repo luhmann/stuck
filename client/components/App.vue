@@ -14,6 +14,9 @@
   --color-spotify: rgb(30, 215, 96);
   --color-bright-bg: rgb(249, 249, 249);
 
+  --font-size-standard: 12px;
+  --font-size-small: 10px;
+
   --grid-column-size: 8px;
   --grid-cols-1: calc(1 * var(--grid-column-size));
   --grid-cols-2: calc(2 * var(--grid-column-size));
@@ -35,11 +38,11 @@ body {
   box-sizing: border-box;
   color: var(--color-text);
   margin: 0;
-  font-size: 1rem;
+  font-size: var(--font-size-standard);
   font-family: 'helvetica neue',
                arial,
                sans-serif;
-  font-weight: 200;
+  // font-weight: 200;
 }
 
 .page {

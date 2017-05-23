@@ -76,13 +76,14 @@ export default {
   border-bottom: 1px solid var(--color-separator);
   cursor: pointer;
   display: grid;
-  grid-template-columns: min-content min-content 48vw 1fr;
+  // grid-template-columns: min-content min-content 48vw 1fr;
+  grid-template-columns: 24px 15vw 48vw 1fr;
   grid-gap: var(--grid-cols-1);
   overflow: hidden;
   padding: var(--grid-cols-2) var(--grid-cols-1);
   position: relative;
 
-  @media screen and (min-width: 768px) {
+  @media (--tablet) {
     grid-gap: var(--grid-cols-2);
   }
 
@@ -96,8 +97,8 @@ export default {
     max-height: calc(13 * var(--grid-column-size));
     object-fit: cover;
     max-width: calc(13 * var(--grid-column-size));
-    height: 20vw;
-    width: 20vw;
+    height: 15vw;
+    width: 15vw;
   }
 
   &__title {
@@ -118,7 +119,7 @@ export default {
   &__link {
     border-bottom: 1px solid;
     color: var(--color-artist);
-    font-size: 12px;
+    font-size: var(--font-size-small);
     text-decoration: none;
     padding-bottom: 2px;
     max-width: calc(82 * var(--grid-column-size));

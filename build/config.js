@@ -19,6 +19,14 @@ module.exports = {
     }),
     require('postcss-nested'),
     require('postcss-utilities')(),
+    require('postcss-custom-media')({
+      extensions: {
+        '--phone': '(min-width: 544px)',
+        '--tablet': '(min-width: 768px)',
+        '--desktop': '(min-width: 992px)',
+        '--large-desktop': '(min-width: 1200px)',
+      },
+    }),
   ],
   cssModules: true,
 }

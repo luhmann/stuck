@@ -27,7 +27,7 @@ export default {
   top: 0;
   z-index: var(--z-index-medium);
 
-  @media (min-width: 768px) {
+  @media (--tablet) {
     padding: var(--grid-cols-2) var(--grid-cols-3);
   }
 }
