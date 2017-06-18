@@ -42,7 +42,7 @@ export default {
     height: var(--grid-cols-3);
     justify-self: center;
     padding: 0;
-    width: var(--grid-cols-3);
+    width: calc(4 * var(--grid-column-size));
 
     &--added svg {
       fill: var(--color-spotify);
