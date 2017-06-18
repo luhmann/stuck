@@ -21,11 +21,11 @@
 </template>
 
 <script>
-import moment from 'moment'
+import moment from '../lib/moment-wrapper'
 
 import LibraryButton from 'components/LibraryButton'
 import SoundAnimation from 'components/SoundAnimation'
-import { SET_UI_CURRENTLY_PLAYING_TRACK } from '../store/mutation-types.js'
+import { SET_UI_CURRENTLY_PLAYING_TRACK } from '../store/mutation-types'
 
 export default {
   props: [
@@ -46,7 +46,7 @@ export default {
       return this.artists.map(artist => artist.name).join(', ')
     },
     dateDisplayString() {
-      return moment(this.date).fromNow(true)
+      return moment(this.date).fromNow()
     },
     imageUrl () {
       const imageUrl = this.image && this.image.url || ''
@@ -77,7 +77,7 @@ export default {
   cursor: pointer;
   display: grid;
   // grid-template-columns: min-content min-content 48vw 1fr;
-  grid-template-columns: 24px 15vw 48vw 1fr;
+  grid-template-columns: calc(4 * var(--grid-column-size)) 15vw 46vw 1fr;
   grid-gap: var(--grid-cols-1);
   overflow: hidden;
   padding: var(--grid-cols-2) var(--grid-cols-1);
@@ -113,7 +113,7 @@ export default {
 
   &__played-at {
     text-align: right;
-    max-width: calc(82 * var(--grid-column-size));
+    // max-width: calc(82 * var(--grid-column-size));
   }
 
   &__link {
