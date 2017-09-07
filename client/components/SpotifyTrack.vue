@@ -1,11 +1,9 @@
 <template>
   <div
     class="track"
-    title="Press & hold to listen to track"
     v-touch:press="playPreviewAudio"
     v-touch:pressup="stopPreviewAudio"
-    @mousedown.self="playPreviewAudio"
-    @mouseup.self="stopPreviewAudio"
+    @dblclick.self="playPreviewAudio"
   >
     <LibraryButton :id="id" />
     <img class="track__img" :src="imageUrl" v-if="imageUrl" :title="id" />

@@ -5,7 +5,7 @@
       :key="track.id"
       :id="track.id"
       :artists="track.artists"
-      :image="getImageForArtist(track.artists[0].id)"
+      :image="track.album.images[0]"
       :name="track.name"
       :date="track.date"
       :previewUrl="track.previewUrl"

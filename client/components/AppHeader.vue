@@ -21,7 +21,7 @@ export default {
   color: white;
   display: grid;
   grid-template-columns: 50px 1fr 40px;
-  padding: var(--grid-cols-2) var(--grid-cols-1);
+  padding: var(--grid-cols-1);
   padding-left: 0;
   position: sticky;
   top: 0;

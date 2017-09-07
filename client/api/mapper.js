@@ -10,6 +10,7 @@ const mapTracks = tracks =>
   tracks.map(item => ({
     id: item.track.id,
     date: item.played_at,
+    album: item.track.album,
     artists: item.track.artists.map(mapArtist),
     images: item.track.album.images,
     previewUrl: item.track.preview_url,
