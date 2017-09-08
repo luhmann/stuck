@@ -1,12 +1,11 @@
 <template>
   <div
     class="track"
-    v-touch:press="playPreviewAudio"
-    v-touch:pressup="stopPreviewAudio"
+    v-touch:doubletap="playPreviewAudio"
     @dblclick.self="playPreviewAudio"
   >
     <LibraryButton :id="id" />
-    <img class="track__img" :src="imageUrl" v-if="imageUrl" :title="id" />
+    <ResponsiveImage class="track__img" :images="images" v-if="images" :title="id" />
     <div class="track__img-placeholder" v-else></div>
     <div class="track__info">
       <div class="track__title" :title="name">{{ name }}</div>
@@ -22,13 +21,14 @@
 import moment from '../lib/moment-wrapper'
 
 import LibraryButton from 'components/LibraryButton'
+import ResponsiveImage from 'components/ResponsiveImage'
 import SoundAnimation from 'components/SoundAnimation'
 import { SET_UI_CURRENTLY_PLAYING_TRACK } from '../store/mutation-types'
 
 export default {
   props: [
     'id',
-    'image',
+    'images',
     'artists',
     'name',
     'date',
@@ -37,6 +37,7 @@ export default {
   ],
   components: {
     LibraryButton,
+    ResponsiveImage,
     SoundAnimation
   },
   computed: {
@@ -46,10 +47,10 @@ export default {
     dateDisplayString() {
       return moment(this.date).fromNow()
     },
-    imageUrl () {
-      const imageUrl = this.image && this.image.url || ''
-      return imageUrl
-    },
+    // imageUrl () {
+    //   const imageUrl = this.image && this.image.url || ''
+    //   return imageUrl
+    // },
     isPlaying () {
       return this.$store.state.ui.currentTrack && this.$store.state.ui.currentTrack.id === this.id
     }
