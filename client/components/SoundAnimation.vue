@@ -1,5 +1,4 @@
 <template>
-  <!-- <div class="container"></div> -->
   <div class="sound-animation">
     <div class="bar"></div>
     <div class="bar"></div>
