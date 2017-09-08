@@ -27,7 +27,5 @@ export const getAuthorizationUrl = state =>
       { state }
     ))}`
 
-export const ARTIST_INFO_URL = '/artists'
-
 export const LIBRARY_SAVED_TRACKS_CONTAIN = '/me/tracks/contains'
 export const LIBRARY_TRACKS = '/me/tracks'

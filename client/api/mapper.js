@@ -20,23 +20,7 @@ const mapTracks = tracks =>
 
 const mapArtistToId = artist => artist.id
 
-const mapTracksToArtistIds = tracks =>
-  tracks.reduce(
-    (prev, item) => [...prev, ...item.artists.map(mapArtistToId)],
-    []
-  )
-
 const filterIsFresh = item => moment(item.expires).isAfter()
-
-const reduceToKeyedArtists = artists =>
-  artists.reduce((prev, artist) => {
-    const artistWithExpiration = Object.assign({}, artist, {
-      expires: moment().add(1, 'day').valueOf(),
-    })
-    return Object.assign({}, prev, {
-      [artist.id]: artistWithExpiration,
-    })
-  }, {})
 
 const reduceTracksContainedInLibrary = (trackIds, containsInfo) =>
   trackIds.reduce(
@@ -52,7 +36,5 @@ export {
   mapArtist,
   mapTracks,
   mapArtistToId,
-  mapTracksToArtistIds,
-  reduceToKeyedArtists,
   reduceTracksContainedInLibrary,
 }

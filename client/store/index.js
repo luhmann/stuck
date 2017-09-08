@@ -18,8 +18,8 @@ const store = new Vuex.Store({
   strict: isDev(),
   plugins: [
     createPersistedState({
-      key: 'spotify-recent',
-      paths: ['authentication', 'spotify.artists'],
+      key: 'stuck',
+      paths: ['authentication'],
     }),
   ],
 })

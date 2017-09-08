@@ -50,7 +50,6 @@ const router = new Router({
         }
       },
     },
-    // TODO: Improve
     { path: '*', component: Home },
   ],
 })

@@ -35,8 +35,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      tracks: 'recentTracks',
-      getImageForArtist: 'imageForArtist'
+      tracks: 'recentTracks'
     })
   },
   methods: {

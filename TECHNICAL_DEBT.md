@@ -1,1 +1,1 @@
-* Remove request of artist, now that we show the album cover
+* Consider the use of action-creators for both actions and mutations
