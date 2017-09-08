@@ -1,8 +1,7 @@
 <template>
   <div
     class="track"
-    v-touch:doubletap="playPreviewAudio"
-    @dblclick.self="playPreviewAudio"
+    @click="togglePreviewAudio"
   >
     <LibraryButton :id="id" />
     <ResponsiveImage class="track__img" :images="images" v-if="images" :title="id" />
@@ -47,10 +46,6 @@ export default {
     dateDisplayString() {
       return moment(this.date).fromNow()
     },
-    // imageUrl () {
-    //   const imageUrl = this.image && this.image.url || ''
-    //   return imageUrl
-    // },
     isPlaying () {
       return this.$store.state.ui.currentTrack && this.$store.state.ui.currentTrack.id === this.id
     }
@@ -64,6 +59,13 @@ export default {
     },
     stopPreviewAudio () {
       this.$store.commit(SET_UI_CURRENTLY_PLAYING_TRACK, null)
+    },
+    togglePreviewAudio () {
+      if(this.isPlaying) {
+        this.stopPreviewAudio()
+      } else {
+        this.playPreviewAudio()
+      }
     }
   }
 }
@@ -75,7 +77,7 @@ export default {
   border-bottom: 1px solid var(--color-separator);
   cursor: pointer;
   display: grid;
-  // grid-template-columns: min-content min-content 48vw 1fr;
+  /* grid-template-columns: min-content min-content 48vw 1fr; */
   grid-template-columns: calc(4 * var(--grid-column-size)) 15vw 46vw 1fr;
   grid-gap: var(--grid-cols-1);
   overflow: hidden;
