@@ -1,10 +1,10 @@
 <template>
   <div>
-    <button class="library-action library-action--added" v-if="isTrackInLibrary(id)" @click="removeTrack(id)">
+    <button class="library-action library-action--added" v-if="isTrackInLibrary(id)" @click.stop="removeTrack(id)">
       <svgicon class="library-action__icon--added" icon="added" width="20" height="20" />
       <svgicon class="library-action__icon--delete" icon="delete" width="18" height="18" />
     </button>
-    <button class="library-action library-action--add" title="Save to your music library" v-else @click="saveTrack(id)">
+    <button class="library-action library-action--add" title="Save to your music library" v-else @click.stop="saveTrack(id)">
       <svgicon icon="add" color="#fff" width="100%" height="100%" />
     </button>
   </div>
@@ -49,13 +49,15 @@ export default {
       margin-left: 2px;
     }
 
-    &:hover {
-      .library-action__icon--delete {
-        display: block;
-      }
+    @media (pointer:fine) {
+      &:hover {
+        .library-action__icon--delete {
+          display: block;
+        }
 
-      .library-action__icon--added {
-        display: none;
+        .library-action__icon--added {
+          display: none;
+        }
       }
     }
 
