@@ -32,7 +32,8 @@ export default {
     'name',
     'date',
     'previewUrl',
-    'externalUrl'
+    'externalUrl',
+    'now'
   ],
   components: {
     LibraryButton,
@@ -44,7 +45,7 @@ export default {
       return this.artists.map(artist => artist.name).join(', ')
     },
     dateDisplayString() {
-      return moment(this.date).fromNow()
+      return moment(this.date).from(this.now)
     },
     isPlaying () {
       return this.$store.state.ui.currentTrack && this.$store.state.ui.currentTrack.id === this.id

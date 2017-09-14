@@ -11,6 +11,7 @@
         :date="track.date"
         :previewUrl="track.previewUrl"
         :externalUrl="track.externalUrl"
+        :now="now"
       ></spotify-track>
     </transition-group>
     <audio-preview />
@@ -20,6 +21,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import moment from '../lib/moment-wrapper'
 import { REQUEST_RECENT_TRACKS, POLL_RECENT_TRACKS } from '../store/action-types.js'
 import { POLLING_INTERVAL } from '../lib/env'
 
@@ -35,11 +37,21 @@ export default {
     if (!this.$store.state.spotify.recentTracks.loaded) {
       this.requestRecentTracks()
     }
-
-    this.interval = window.setInterval(this.pollRecentTracks, POLLING_INTERVAL)
   },
-  beforeDestroy() {
-    window.clearInterval(this.interval)
+  data() {
+    return {
+      now: moment()
+    }
+  },
+  mounted() {
+    this.pollingInterval = setInterval(this.pollRecentTracks, POLLING_INTERVAL)
+    this.nowInterval = setInterval(() => {
+      this.now = moment()
+    }, 60000);
+  },
+  destroyed() {
+    clearInterval(this.pollingInterval)
+    clearInterval(this.nowInterval)
   },
   computed: {
     ...mapGetters({
