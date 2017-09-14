@@ -17,9 +17,9 @@ export default {
     playPreviewAudio() {
       if (this.audioObject.src !== this.currentTrack.previewUrl) {
         this.audioObject.src = this.currentTrack.previewUrl
-        this.audioObject.volume = 0.9
-        this.audioObject.play()
+        this.audioObject.volume = 0.5
       }
+      this.audioObject.play()
     },
     stopPreviewAudio() {
       this.audioObject.pause()
