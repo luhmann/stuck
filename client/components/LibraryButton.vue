@@ -60,9 +60,9 @@ export default {
         }
       }
     }
+  }
 
-    &__icon--delete {
-      display: none
-    }
+  svg.library-action__icon--delete {
+    display: none
   }
 </style>

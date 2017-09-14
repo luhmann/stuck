@@ -14,8 +14,8 @@
   },
   "lint-staged": {
     "*.js": [
-      "npm run lint",
       "prettier --write --no-semi --single-quote --trailing-comma es5",
+      "npm run lint",
       "git add"
     ]
   },

@@ -42,7 +42,6 @@ body {
   font-family: 'helvetica neue',
                arial,
                sans-serif;
-  // font-weight: 200;
 }
 
 .page {
