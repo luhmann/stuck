@@ -88,10 +88,18 @@ export default {
       grid-gap: var(--grid-cols-2);
     }
 
-    @supports (grid-template-columns: min-content) {
-      grid-template-columns: min-content min-content 48vw 1fr;
+    @media(--max) {
+      grid-template-columns: calc(4 * var(--grid-column-size)) calc(13 * var(--grid-column-size)) calc(92 * var(--grid-column-size)) 1fr;
+      padding: var(--grid-cols-2);
     }
 
+    @supports (grid-template-columns: min-content) {
+      grid-template-columns: min-content min-content 48vw 1fr;
+
+      @media(--max) {
+        grid-template-columns: min-content min-content calc(92 * var(--grid-column-size)) 1fr;
+      }
+    }
 
     &__img, &__title, &__artist, &__played-at {
       position: relative;
@@ -106,19 +114,20 @@ export default {
       width: 15vw;
     }
 
+    &__info {
+      max-width: 46vw;
+    }
+
     &__title {
       margin-bottom: calc(0.5 * var(--grid-column-size));
-      max-width: calc(82 * var(--grid-column-size));
     }
 
     &__artist {
       color: var(--color-artist);
-      max-width: calc(82 * var(--grid-column-size));
     }
 
     &__played-at {
       text-align: right;
-      // max-width: calc(82 * var(--grid-column-size));
     }
 
     &__link {

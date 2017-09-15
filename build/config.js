@@ -23,6 +23,7 @@ module.exports = {
       extensions: {
         '--phone': '(min-width: 544px)',
         '--tablet': '(min-width: 768px)',
+        '--max': '(min-width: 1024px)',
         '--desktop': '(min-width: 992px)',
         '--large-desktop': '(min-width: 1200px)',
       },
