@@ -17,7 +17,6 @@ if (isDev()) {
 }
 
 Vue.use(VueProgressiveImage)
-
 Vue.use(svgicon, {
   tagName: 'svgicon',
 })

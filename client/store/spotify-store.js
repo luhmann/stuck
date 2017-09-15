@@ -3,9 +3,11 @@ import moment from 'moment'
 import playerResource from '../api/player.resource'
 import libraryResource from '../api/library.resource'
 import { mapTracks, reduceTracksContainedInLibrary } from '../api/mapper'
+import * as logger from '../lib/logger'
 
 import {
   SET_RECENT_TRACKS,
+  SET_REQUEST_IN_PROGRESS,
   ADD_LIBRARY_CONTAINS_INFO,
   SET_LIBRARY_CONTAINS_INFO,
   UPDATE_RECENT_TRACKS,
@@ -19,14 +21,18 @@ import {
   REMOVE_TRACK_FROM_LIBRARY,
 } from './action-types'
 
-import { uiStartLoading, uiStopLoading } from './common'
+import { requestInProgress, requestCompleted } from './common'
 
 const spotifyStore = {
   state: {
     recentTracks: {
       expires: null,
       items: [],
-      cursors: null,
+      cursors: {
+        before: Number(Date.now()),
+        after: null,
+      },
+      loading: false,
       loaded: false,
     },
     library: {
@@ -35,8 +41,11 @@ const spotifyStore = {
   },
   mutations: {
     [SET_RECENT_TRACKS]({ recentTracks }, payload) {
-      recentTracks.cursors = payload.cursors
-      recentTracks.items = payload.items
+      if (payload.cursors) {
+        recentTracks.cursors = payload.cursors
+      }
+
+      recentTracks.items = [...recentTracks.items, ...payload.items]
       recentTracks.loaded = true
       recentTracks.expires = moment()
         .add(1, 'min')
@@ -54,6 +63,15 @@ const spotifyStore = {
       }
       recentTracks.items = [...payload.items, ...recentTracks.items]
     },
+    [SET_REQUEST_IN_PROGRESS](state, payload) {
+      if (state[payload.stateSlice]) {
+        state[payload.stateSlice].loading = payload.status
+      } else {
+        logger.error(
+          'Tried to set request in progress on an unknown state-slice'
+        )
+      }
+    },
   },
   actions: {
     [POLL_RECENT_TRACKS]({ commit, dispatch, getters }) {
@@ -68,15 +86,25 @@ const spotifyStore = {
         })
     },
     [REQUEST_RECENT_TRACKS]({ commit, dispatch, getters }) {
-      uiStartLoading()
-      playerResource.getRecentTracks().then(recentTracks => {
-        commit(SET_RECENT_TRACKS, recentTracks)
-        dispatch(
-          REQUEST_LIBRARY_CONTAINS,
-          getters.recentTracks.map(track => track.id)
+      if (getters.requestForRecentTracksInProgress === true) {
+        logger.info(
+          'Request for recent tracks was prevented because already in progress'
         )
-        uiStopLoading()
-      })
+        return false
+      }
+
+      requestInProgress('recentTracks')
+
+      playerResource
+        .getRecentTracks(null, getters.recentTracksCursors.before)
+        .then(recentTracks => {
+          commit(SET_RECENT_TRACKS, recentTracks)
+          dispatch(
+            REQUEST_LIBRARY_CONTAINS,
+            getters.recentTracks.map(track => track.id)
+          )
+          requestCompleted('recentTracks')
+        })
     },
     [REQUEST_LIBRARY_CONTAINS]({ commit, getters }, trackIds) {
       if (trackIds.length !== 0) {
@@ -106,6 +134,8 @@ const spotifyStore = {
     },
   },
   getters: {
+    requestForRecentTracksInProgress: ({ recentTracks }) =>
+      recentTracks.loading,
     recentTracksCursors: ({ recentTracks }) => recentTracks.cursors,
     recentTracks: ({ recentTracks }) => mapTracks(recentTracks.items),
     isTrackInLibrary: ({ library }) => trackId =>
