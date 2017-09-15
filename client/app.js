@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
 import svgicon from 'vue-svgicon'
+import VueProgressiveImage from 'vue-progressive-image'
 
 import { isDev } from './lib/env'
 import App from './components/App'
@@ -14,6 +15,8 @@ if (isDev()) {
   window.store = store
   window.storeActions = storeActions
 }
+
+Vue.use(VueProgressiveImage)
 
 Vue.use(svgicon, {
   tagName: 'svgicon',

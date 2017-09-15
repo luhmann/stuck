@@ -33,6 +33,7 @@
     "moment": "^2.18.1",
     "promise-polyfill": "^6.0.2",
     "vue": "^2.2.0",
+    "vue-progressive-image": "^2.1.5",
     "vue-router": "^2.0.0",
     "vuex": "^2.0.0",
     "vuex-router-sync": "^4.0.0",
