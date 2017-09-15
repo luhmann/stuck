@@ -16,14 +16,13 @@
     </transition-group>
     <audio-preview />
   </main>
-
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import moment from '../lib/moment-wrapper'
 import { REQUEST_RECENT_TRACKS, POLL_RECENT_TRACKS } from '../store/action-types.js'
-import { POLLING_INTERVAL } from '../lib/env'
+import { ELAPSED_UPDATE_INTERVAL, POLLING_INTERVAL } from '../lib/env'
 
 import AudioPreview from 'components/AudioPreview'
 import SpotifyTrack from 'components/SpotifyTrack'
@@ -47,7 +46,7 @@ export default {
     this.pollingInterval = setInterval(this.pollRecentTracks, POLLING_INTERVAL)
     this.nowInterval = setInterval(() => {
       this.now = moment()
-    }, 60000);
+    }, ELAPSED_UPDATE_INTERVAL);
   },
   destroyed() {
     clearInterval(this.pollingInterval)
