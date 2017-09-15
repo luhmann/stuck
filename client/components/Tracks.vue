@@ -35,11 +35,6 @@ export default {
     NoMoreTracks,
     SpotifyTrack
   },
-  created() {
-    if (!this.$store.state.spotify.recentTracks.loaded) {
-      this.requestRecentTracks()
-    }
-  },
   data() {
     return {
       now: moment()
@@ -57,13 +52,10 @@ export default {
   },
   computed: {
     ...mapGetters({
-      tracks: 'recentTracks'
+      tracks: 'recentTracks',
     })
   },
   methods: {
-    requestRecentTracks () {
-      this.$store.dispatch(REQUEST_RECENT_TRACKS)
-    },
     pollRecentTracks () {
       this.$store.dispatch(POLL_RECENT_TRACKS)
     }

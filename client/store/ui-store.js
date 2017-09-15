@@ -6,7 +6,7 @@ import {
 
 const uiStore = {
   state: {
-    isLoading: false,
+    isLoading: true,
     hasError: false,
     currentTrack: null,
   },

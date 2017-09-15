@@ -21,7 +21,7 @@ import {
   REMOVE_TRACK_FROM_LIBRARY,
 } from './action-types'
 
-import { requestInProgress, requestCompleted } from './common'
+import { requestInProgress, requestCompleted, uiStopLoading } from './common'
 
 const spotifyStore = {
   state: {
@@ -104,6 +104,7 @@ const spotifyStore = {
             getters.recentTracks.map(track => track.id)
           )
           requestCompleted('recentTracks')
+          uiStopLoading()
         })
     },
     [REQUEST_LIBRARY_CONTAINS]({ commit, getters }, trackIds) {
@@ -138,7 +139,7 @@ const spotifyStore = {
       recentTracks.loading,
     recentTracksCursors: ({ recentTracks }) => recentTracks.cursors,
     recentTracks: ({ recentTracks }) => mapTracks(recentTracks.items),
-    recentTracksLoaded: ({ recentTracks }) => recentTracks.loaded,
+    areRecentTracksLoaded: ({ recentTracks }) => recentTracks.loaded,
     isTrackInLibrary: ({ library }) => trackId =>
       Boolean(library.savedTracks[trackId]),
   },

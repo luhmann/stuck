@@ -10,9 +10,7 @@ import { mapGetters } from 'vuex'
 export default {
 
   computed: {
-    ...mapGetters({
-      areRecentTracksLoaded: 'recentTracksLoaded'
-    })
+    ...mapGetters(['areRecentTracksLoaded'])
   },
 
 }
