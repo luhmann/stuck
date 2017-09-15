@@ -14,6 +14,7 @@
         :now="now"
       ></spotify-track>
     </transition-group>
+    <NoMoreTracks />
     <audio-preview />
   </main>
 </template>
@@ -25,11 +26,13 @@ import { REQUEST_RECENT_TRACKS, POLL_RECENT_TRACKS } from '../store/action-types
 import { ELAPSED_UPDATE_INTERVAL, POLLING_INTERVAL } from '../lib/env'
 
 import AudioPreview from 'components/AudioPreview'
+import NoMoreTracks from 'components/NoMoreTracks'
 import SpotifyTrack from 'components/SpotifyTrack'
 
 export default {
   components: {
     AudioPreview,
+    NoMoreTracks,
     SpotifyTrack
   },
   created() {

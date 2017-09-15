@@ -2,7 +2,7 @@
 
 module.exports = {
   port: 4000,
-  title: 'Stuck: Your last played tracks',
+  title: 'Stuck: Your recently played tracks on Spotify',
   // When you use electron please set to relative path like ./
   // otherwise only set to absolute path when you're using history mode
   publicPath: '/',
