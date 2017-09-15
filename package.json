@@ -73,7 +73,7 @@
     "raw-loader": "^0.5.1",
     "style-loader": "^0.13.1",
     "testcafe": "^0.12.1",
-    "vue-loader": "^11.0.0",
+    "vue-loader": "^13.0.0",
     "vue-svgicon": "^1.1.8",
     "vue-template-compiler": "^2.2.0",
     "vuex-persistedstate": "^1.4.1",
