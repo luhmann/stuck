@@ -15,16 +15,15 @@ const uiStopLoading = () => {
   store.commit(SET_UI_LOADING, false)
 }
 
-const uiSetError = () => {
-  store.commit(SET_UI_ERROR, true)
+const uiSetError = err => {
+  store.commit(SET_UI_ERROR, err)
 }
 
 const uiClearError = () => {
-  store.commit(SET_UI_ERROR, false)
+  store.commit(SET_UI_ERROR, null)
 }
 
 const requestInProgress = stateSlice => {
-  console.log('in request in progress')
   store.commit(SET_REQUEST_IN_PROGRESS, {
     stateSlice,
     status: true,

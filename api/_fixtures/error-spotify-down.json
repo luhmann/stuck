@@ -1,0 +1,6 @@
+{
+  "error": {
+      "status": 503,
+      "message": "service unavailable"
+  }
+}

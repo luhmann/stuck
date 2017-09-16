@@ -3,13 +3,20 @@ import router from '../router/'
 import { ROUTE_AUTHENTICATE } from '../router/route-names'
 import store from '../store/'
 
+import { isDev, MOCK_SERVER_BASE_URL, USE_MOCK_API } from '../lib/env'
 import * as logger from '../lib/logger'
-import { appResetAuthorized, uiSetError } from '../store/common'
+import { appResetAuthorized, uiSetError, uiStopLoading } from '../store/common'
+
+const getBaseUrl = () =>
+  isDev() && USE_MOCK_API
+    ? `${MOCK_SERVER_BASE_URL}/v1/`
+    : `https://api.spotify.com/v1/`
 
 const spotifyEndpoint = axios.create({
-  baseURL: `https://api.spotify.com/v1/`,
+  baseURL: getBaseUrl(),
   headers: {
     Authorization: null,
+    Accept: 'application/json',
   },
 })
 
@@ -27,7 +34,8 @@ spotifyEndpoint.interceptors.response.use(undefined, error => {
   }
 
   logger.error(error, error.response, error.config)
-  uiSetError()
+  uiSetError(error.response.data)
+  uiStopLoading()
 
   return Promise.reject(error)
 })

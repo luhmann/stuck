@@ -21,7 +21,12 @@ import {
   REMOVE_TRACK_FROM_LIBRARY,
 } from './action-types'
 
-import { requestInProgress, requestCompleted, uiStopLoading } from './common'
+import {
+  requestInProgress,
+  requestCompleted,
+  uiStartLoading,
+  uiStopLoading,
+} from './common'
 
 const spotifyStore = {
   state: {
@@ -43,6 +48,8 @@ const spotifyStore = {
     [SET_RECENT_TRACKS]({ recentTracks }, payload) {
       if (payload.cursors) {
         recentTracks.cursors = payload.cursors
+      } else {
+        recentTracks.cursors.after = Number(Date.now())
       }
 
       recentTracks.items = [...recentTracks.items, ...payload.items]
@@ -94,6 +101,7 @@ const spotifyStore = {
       }
 
       requestInProgress('recentTracks')
+      uiStartLoading()
 
       playerResource
         .getRecentTracks(null, getters.recentTracksCursors.before)

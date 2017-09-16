@@ -1964,7 +1964,7 @@ duplexer@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/duplexer/-/duplexer-0.1.1.tgz#ace6ff808c1ce66b57d1ebf97977acb02334cfc1"
 
-dyson@^1.2.0:
+dyson@^1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/dyson/-/dyson-1.2.4.tgz#8457c12912e8a73ece1fc277cf1532b097800fe3"
   dependencies:
@@ -4221,7 +4221,7 @@ node-version@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/node-version/-/node-version-1.1.0.tgz#f437d7ba407e65e2c4eaef8887b1718ba523d4f0"
 
-nodemon@^1.11.0:
+nodemon@^1.12.1:
   version "1.12.1"
   resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-1.12.1.tgz#996a56dc49d9f16bbf1b78a4de08f13634b3878d"
   dependencies:

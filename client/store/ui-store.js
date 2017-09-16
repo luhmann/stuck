@@ -7,7 +7,7 @@ import {
 const uiStore = {
   state: {
     isLoading: true,
-    hasError: false,
+    error: null,
     currentTrack: null,
   },
   mutations: {
@@ -15,7 +15,7 @@ const uiStore = {
       state.isLoading = payload
     },
     [SET_UI_ERROR](state, payload) {
-      state.hasError = payload
+      state.error = payload
     },
     [SET_UI_CURRENTLY_PLAYING_TRACK](state, payload) {
       state.currentTrack = payload
@@ -24,6 +24,8 @@ const uiStore = {
   actions: {},
   getters: {
     isLoading: ({ isLoading }) => isLoading,
+    hasError: ({ error }) => error !== null,
+    errorDetails: ({ error }) => error,
   },
 }
 

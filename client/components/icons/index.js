@@ -1,6 +1,7 @@
 require('./add')
 require('./added')
 require('./delete')
+require('./error')
 require('./logo')
 require('./play')
 require('./ribbon')
