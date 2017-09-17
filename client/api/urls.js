@@ -1,6 +1,10 @@
 import qs from 'query-string'
 
-const BASE_URL = 'http://svo.dev:4000'
+import { isDev } from '../lib/env'
+
+const BASE_URL = isDev()
+  ? 'http://svo.dev:4000'
+  : 'https://luhmann.github.io/stuck/'
 
 export const RECENTLY_PLAYED_URL = '/me/player/recently-played'
 
