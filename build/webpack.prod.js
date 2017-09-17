@@ -1,4 +1,5 @@
 'use strict'
+/* eslint-disable capitalized-comments */
 process.env.NODE_ENV = 'production'
 
 const exec = require('child_process').execSync
@@ -7,7 +8,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const ProgressPlugin = require('webpack/lib/ProgressPlugin')
 const OfflinePlugin = require('offline-plugin')
 const base = require('./webpack.base')
-const pkg = require('../package')
 const _ = require('./utils')
 const config = require('./config')
 
@@ -21,6 +21,8 @@ if (config.electron) {
   base.devtool = 'source-map'
 }
 
+base.output.publicPath = '/stuck'
+
 // use hash filename to support long-term caching
 base.output.filename = '[name].[chunkhash:8].js'
 // add webpack plugins
@@ -28,26 +30,30 @@ base.plugins.push(
   new ProgressPlugin(),
   new ExtractTextPlugin('styles.[contenthash:8].css'),
   new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify('production')
+    'process.env.NODE_ENV': JSON.stringify('production'),
   }),
   new webpack.optimize.UglifyJsPlugin({
     sourceMap: true,
     compress: {
-      warnings: false
+      warnings: false,
     },
     output: {
-      comments: false
-    }
+      comments: false,
+    },
   }),
   // extract vendor chunks
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
     minChunks: module => {
-      return module.resource && /\.(js|css|es6)$/.test(module.resource) && module.resource.indexOf('node_modules') !== -1
-    }
+      return (
+        module.resource &&
+        /\.(js|css|es6)$/.test(module.resource) &&
+        module.resource.indexOf('node_modules') !== -1
+      )
+    },
   }),
   new webpack.optimize.CommonsChunkPlugin({
-    name: 'manifest'
+    name: 'manifest',
   }),
   // progressive web app
   // it uses the publicPath in webpack config
@@ -55,8 +61,8 @@ base.plugins.push(
     relativePaths: false,
     AppCache: false,
     ServiceWorker: {
-      events: true
-    }
+      events: true,
+    },
   })
 )
 
@@ -72,8 +78,8 @@ _.cssProcessors.forEach(processor => {
     test: processor.test,
     loader: ExtractTextPlugin.extract({
       use: [_.cssLoader].concat(loaders),
-      fallback: 'style-loader'
-    })
+      fallback: 'style-loader',
+    }),
   })
 })
 
@@ -86,7 +92,7 @@ base.stats = {
   // Add built modules information to chunk information
   chunkModules: false,
   chunkOrigins: false,
-  modules: false
+  modules: false,
 }
 
 module.exports = base
