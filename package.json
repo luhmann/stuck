@@ -50,6 +50,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "cross-env": "^2.0.0",
     "css-loader": "^0.23.1",
+    "cz-conventional-changelog": "^2.0.0",
     "dyson": "^1.2.4",
     "eslint": "^3.19.0",
     "eslint-config-prettier": "^2.1.0",
@@ -83,5 +84,10 @@
     "webpack-dev-middleware": "^1.8.1",
     "webpack-hot-middleware": "^2.12.2",
     "xo": "^0.18.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
