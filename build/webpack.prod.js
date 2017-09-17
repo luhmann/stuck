@@ -6,7 +6,6 @@ const exec = require('child_process').execSync
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const ProgressPlugin = require('webpack/lib/ProgressPlugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const OfflinePlugin = require('offline-plugin')
 const base = require('./webpack.base')
 const _ = require('./utils')
@@ -22,7 +21,7 @@ if (config.electron) {
   base.devtool = 'source-map'
 }
 
-base.output.publicPath = '/stuck'
+// base.output.publicPath = '/stuck'
 
 // use hash filename to support long-term caching
 base.output.filename = '[name].[chunkhash:8].js'
@@ -64,15 +63,7 @@ base.plugins.push(
     ServiceWorker: {
       events: true,
     },
-  }),
-  // config for iamges in github pages
-  new CopyWebpackPlugin([
-    {
-      from: _.cwd('./static'),
-      // to the root of dist path
-      to: './stuck',
-    },
-  ])
+  })
 )
 
 // extract css in standalone css files
