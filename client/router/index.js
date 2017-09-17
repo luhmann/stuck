@@ -6,7 +6,6 @@ import store from '../store/'
 import { appSetAuthorized } from '../store/common'
 import Authentication from '../views/Authentication'
 import Home from '../views/Home'
-import { isDev } from '../lib/env'
 
 import {
   ROUTE_DEFAULT,
@@ -18,7 +17,6 @@ Vue.use(Router)
 
 const router = new Router({
   mode: 'history',
-  base: isDev() ? '/' : '/stuck/',
   routes: [
     {
       path: '/',

@@ -2,9 +2,7 @@ import qs from 'query-string'
 
 import { isDev } from '../lib/env'
 
-const BASE_URL = isDev()
-  ? 'http://svo.dev:4000'
-  : 'https://luhmann.github.io/stuck/'
+const BASE_URL = isDev() ? 'http://svo.dev:4000' : 'http://stuck.luhmann.me/'
 
 export const RECENTLY_PLAYED_URL = '/me/player/recently-played'
 
