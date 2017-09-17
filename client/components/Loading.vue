@@ -1,5 +1,5 @@
 <template>
-  <div class="root" :class="{ open: isOpen}">
+  <main class="root" :class="{ open: isOpen}">
     <div class="background-image"></div>
     <svg class="svg-center" width="200" height="200">
       <path class="path-center" d="M 100 100 m -100 0 a 100 100 0 1 0 200 0 a 100 100 0 1 0 -200 0" />
@@ -11,10 +11,7 @@
       <path class="path-borders" d="M 5000 2500 m -621 0 a 621 621 0 1 0 1242 0 a 621 621 0 1 0 -1242 0" />
       <path class="path-borders" d="M 5000 2500 m -770 0 a 770 770 0 1 0 1540 0 a 770 770 0 1 0 -1540 0" />
     </svg>
-  </body>
-  </html>
-
-  </div>
+  </main>
 </template>
 
 <script>

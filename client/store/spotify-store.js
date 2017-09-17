@@ -42,6 +42,7 @@ const spotifyStore = {
     },
     library: {
       savedTracks: {},
+      loaded: false,
     },
   },
   mutations: {
@@ -59,6 +60,7 @@ const spotifyStore = {
         .valueOf()
     },
     [ADD_LIBRARY_CONTAINS_INFO]({ library }, payload) {
+      library.loaded = true
       library.savedTracks = Object.assign({}, library.savedTracks, payload)
     },
     [SET_LIBRARY_CONTAINS_INFO]({ library }, payload) {
@@ -148,6 +150,7 @@ const spotifyStore = {
     recentTracksCursors: ({ recentTracks }) => recentTracks.cursors,
     recentTracks: ({ recentTracks }) => mapTracks(recentTracks.items),
     areRecentTracksLoaded: ({ recentTracks }) => recentTracks.loaded,
+    isLibraryLoaded: ({ library }) => library.loaded,
     isTrackInLibrary: ({ library }) => trackId =>
       Boolean(library.savedTracks[trackId]),
   },

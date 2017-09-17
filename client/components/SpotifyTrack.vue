@@ -3,7 +3,7 @@
     class="track"
     @click="togglePreviewAudio"
   >
-    <LibraryButton :id="id" />
+    <LibraryButton :id="id" :class="{'is-invisible': !isLibraryLoaded}" />
     <ResponsiveImage class="track__img" :images="images" v-if="images" :title="id" />
     <div class="track__img-placeholder" v-else></div>
     <div class="track__info">
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import moment from '../lib/moment-wrapper'
 
 import LibraryButton from 'components/LibraryButton'
@@ -41,6 +42,7 @@ export default {
     SoundAnimation
   },
   computed: {
+    ...mapGetters(['isLibraryLoaded']),
     artistDisplayString() {
       return this.artists.map(artist => artist.name).join(', ')
     },
@@ -73,6 +75,10 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
+  .is-invisible {
+    visibility: hidden;
+  }
+
   .track {
     align-items: center;
     border-bottom: 1px solid var(--color-separator);

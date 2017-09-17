@@ -3,7 +3,8 @@
     <app-header />
     <Error v-if="hasError" />
     <Loading v-else-if="isLoading" />
-    <Tracks v-else />
+    <Tracks v-else-if="recentTracks.length" />
+    <NoTracksYet v-else />
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import { mapGetters } from 'vuex'
 import AppHeader from 'components/AppHeader'
 import Loading from 'components/Loading'
 import Error from 'components/Error'
+import NoTracksYet from 'components/NoTracksYet'
 import Tracks from 'components/Tracks'
 
 import { REQUEST_RECENT_TRACKS } from '../store/action-types.js'
@@ -21,6 +23,7 @@ export default {
     AppHeader,
     Error,
     Loading,
+    NoTracksYet,
     Tracks
   },
   created() {
@@ -29,7 +32,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['isLoading', 'isAuthenticated', 'areRecentTracksLoaded', 'hasError'])
+    ...mapGetters(['isLoading', 'isAuthenticated', 'areRecentTracksLoaded', 'hasError', 'recentTracks'])
   },
   methods: {
     requestRecentTracks () {

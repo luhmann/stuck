@@ -1,10 +1,10 @@
 <template>
-  <div class="error-bg">
+  <main class="error-bg">
     <div class="error-msg">
       <svgicon class="error-icon" icon="error" height="40" width="40" />
       {{ errorMessage }}
     </div>
-  </div>
+  </main>
 </template>
 
 <script>

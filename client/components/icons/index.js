@@ -1,5 +1,6 @@
 require('./add')
 require('./added')
+require('./confused')
 require('./delete')
 require('./error')
 require('./logo')
