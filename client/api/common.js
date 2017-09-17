@@ -3,9 +3,11 @@ import router from '../router/'
 import { ROUTE_AUTHENTICATE } from '../router/route-names'
 import store from '../store/'
 
-import { isDev, MOCK_SERVER_BASE_URL, USE_MOCK_API } from '../lib/env'
+import { isDev, APP_NAME, MOCK_SERVER_BASE_URL, USE_MOCK_API } from '../lib/env'
 import * as logger from '../lib/logger'
 import { appResetAuthorized, uiSetError, uiStopLoading } from '../store/common'
+
+import { getAuthorizationUrl } from './urls'
 
 const getBaseUrl = () =>
   isDev() && USE_MOCK_API
@@ -31,6 +33,12 @@ spotifyEndpoint.interceptors.response.use(undefined, error => {
   try {
     if (error.response.status === 401) {
       appResetAuthorized()
+      if (store.state.authentication.authenticatedBefore) {
+        window.location.assign(getAuthorizationUrl(APP_NAME))
+        return
+      }
+
+      // Default case
       router.push({ name: ROUTE_AUTHENTICATE })
     }
 

@@ -44,6 +44,7 @@
 <script>
 import { mapState } from 'vuex'
 import { getAuthorizationUrl } from '../api/urls'
+import { APP_NAME } from '../lib/env'
 
 import AppHeader from 'components/AppHeader'
 
@@ -55,7 +56,7 @@ export default {
   },
   computed: {
     authorizationUrl () {
-      return getAuthorizationUrl('demo-demo-demo')
+      return getAuthorizationUrl(APP_NAME)
     },
     ...mapState({
       userAuthenticatedBefore: state => state.authentication.authenticatedBefore
