@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import moment from '../lib/moment-wrapper'
 
 import LibraryButton from 'components/LibraryButton'
@@ -42,7 +42,7 @@ export default {
     SoundAnimation
   },
   computed: {
-    ...mapGetters(['isLibraryLoaded']),
+    ...mapState({ isLibraryLoaded: ({ spotify }) => spotify.library.loaded }),
     artistDisplayString() {
       return this.artists.map(artist => artist.name).join(', ')
     },
@@ -90,7 +90,7 @@ export default {
     padding: var(--grid-cols-2) var(--grid-cols-1);
     position: relative;
 
-    @media (--tablet) {
+    @media(--tablet) {
       grid-gap: var(--grid-cols-2);
     }
 

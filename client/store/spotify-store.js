@@ -149,8 +149,6 @@ const spotifyStore = {
       recentTracks.loading,
     recentTracksCursors: ({ recentTracks }) => recentTracks.cursors,
     recentTracks: ({ recentTracks }) => mapTracks(recentTracks.items),
-    areRecentTracksLoaded: ({ recentTracks }) => recentTracks.loaded,
-    isLibraryLoaded: ({ library }) => library.loaded,
     isTrackInLibrary: ({ library }) => trackId =>
       Boolean(library.savedTracks[trackId]),
   },

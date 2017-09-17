@@ -23,7 +23,6 @@ const uiStore = {
   },
   actions: {},
   getters: {
-    isLoading: ({ isLoading }) => isLoading,
     hasError: ({ error }) => error !== null,
     errorDetails: ({ error }) => error,
   },

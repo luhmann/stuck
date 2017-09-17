@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import AppHeader from 'components/AppHeader'
 import Loading from 'components/Loading'
 import Error from 'components/Error'
@@ -32,7 +32,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['isLoading', 'isAuthenticated', 'areRecentTracksLoaded', 'hasError', 'recentTracks'])
+    ...mapState({
+      areRecentTracksLoaded: ({ spotify }) => spotify.recentTracks.loaded,
+      isLoading: ({ ui }) => ui.isLoading,
+    }),
+    ...mapGetters(['isAuthenticated', 'hasError', 'recentTracks'])
   },
   methods: {
     requestRecentTracks () {

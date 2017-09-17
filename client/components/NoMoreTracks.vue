@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
 
   computed: {
-    ...mapGetters(['areRecentTracksLoaded'])
+    ...mapState({ areRecentTracksLoaded: ({ spotify }) => spotify.recentTracks.loaded })
   },
 
 }
