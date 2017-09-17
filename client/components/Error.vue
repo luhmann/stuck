@@ -43,7 +43,11 @@ export default {
   computed: {
     ...mapGetters(['errorDetails']),
     errorMessage() {
-      return errorMessageMap.get(this.errorDetails.error.status) || defaultErrorMessage
+      try {
+        return errorMessageMap.get(this.errorDetails.error.status) || defaultErrorMessage
+      } catch (err) {
+        return defaultErrorMessage
+      }
     }
   }
 }

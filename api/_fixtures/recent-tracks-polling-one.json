@@ -1,0 +1,85 @@
+{
+  "items" : [ {
+    "track" : {
+      "album" : {
+        "album_type" : "album",
+        "artists" : [ {
+          "external_urls" : {
+            "spotify" : "https://open.spotify.com/artist/4tvKz56Tr39bkhcQUTO0Xr"
+          },
+          "href" : "https://api.spotify.com/v1/artists/4tvKz56Tr39bkhcQUTO0Xr",
+          "id" : "4tvKz56Tr39bkhcQUTO0Xr",
+          "name" : "Angus & Julia Stone",
+          "type" : "artist",
+          "uri" : "spotify:artist:4tvKz56Tr39bkhcQUTO0Xr"
+        } ],
+        "available_markets" : [ "AD", "AR", "AT", "AU", "BE", "BG", "BO", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HU", "ID", "IE", "IS", "IT", "JP", "LI", "LT", "LU", "LV", "MC", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "PA", "PE", "PH", "PL", "PT", "PY", "SE", "SG", "SK", "SV", "TR", "TW", "US", "UY" ],
+        "external_urls" : {
+          "spotify" : "https://open.spotify.com/album/3k3EvBHWTu3VkyAh5Pevv9"
+        },
+        "href" : "https://api.spotify.com/v1/albums/3k3EvBHWTu3VkyAh5Pevv9",
+        "id" : "3k3EvBHWTu3VkyAh5Pevv9",
+        "images" : [ {
+          "height" : 640,
+          "url" : "https://i.scdn.co/image/edc7bc64b69b8aba149941ad2c0e3d80c360d246",
+          "width" : 640
+        }, {
+          "height" : 300,
+          "url" : "https://i.scdn.co/image/7981e42c176f48b019d2885f37f1334813b08658",
+          "width" : 300
+        }, {
+          "height" : 64,
+          "url" : "https://i.scdn.co/image/bfaec96ee6675c8df3d0e5acbb1d8379591a8667",
+          "width" : 64
+        } ],
+        "name" : "SNOW",
+        "type" : "album",
+        "uri" : "spotify:album:3k3EvBHWTu3VkyAh5Pevv9"
+      },
+      "artists" : [ {
+        "external_urls" : {
+          "spotify" : "https://open.spotify.com/artist/4tvKz56Tr39bkhcQUTO0Xr"
+        },
+        "href" : "https://api.spotify.com/v1/artists/4tvKz56Tr39bkhcQUTO0Xr",
+        "id" : "4tvKz56Tr39bkhcQUTO0Xr",
+        "name" : "Angus & Julia Stone",
+        "type" : "artist",
+        "uri" : "spotify:artist:4tvKz56Tr39bkhcQUTO0Xr"
+      } ],
+      "available_markets" : [ "AD", "AR", "AT", "AU", "BE", "BG", "BO", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HU", "ID", "IE", "IS", "IT", "JP", "LI", "LT", "LU", "LV", "MC", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "PA", "PE", "PH", "PL", "PT", "PY", "SE", "SG", "SK", "SV", "TR", "TW", "US", "UY" ],
+      "disc_number" : 1,
+      "duration_ms" : 197053,
+      "explicit" : false,
+      "external_ids" : {
+        "isrc" : "CAN111700294"
+      },
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/track/1I0ykMxYTIG0bBbNIbb3ut"
+      },
+      "href" : "https://api.spotify.com/v1/tracks/1I0ykMxYTIG0bBbNIbb3ut",
+      "id" : "1I0ykMxYTIG0bBbNIbb3ut",
+      "name" : "Make It Out Alive",
+      "popularity" : 34,
+      "preview_url" : "https://p.scdn.co/mp3-preview/74189432d05dd837475c65d800f2ea68da37284b?cid=c46f26d260ed47199a729fa8e3b11219",
+      "track_number" : 6,
+      "type" : "track",
+      "uri" : "spotify:track:1I0ykMxYTIG0bBbNIbb3ut"
+    },
+    "context" : {
+      "uri" : "spotify:album:3k3EvBHWTu3VkyAh5Pevv9",
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/album/3k3EvBHWTu3VkyAh5Pevv9"
+      },
+      "href" : "https://api.spotify.com/v1/albums/null",
+      "type" : "album"
+    },
+    "played_at" : "2017-09-17T11:56:10.885Z"
+  } ],
+  "next" : "https://api.spotify.com/v1/me/player/recently-played?after=1505649370885&limit=49",
+  "cursors" : {
+    "after" : "1505649370885",
+    "before" : "1505649370885"
+  },
+  "limit" : 49,
+  "href" : "https://api.spotify.com/v1/me/player/recently-played?after=1505641195561&limit=49"
+}

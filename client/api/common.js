@@ -28,15 +28,20 @@ spotifyEndpoint.interceptors.request.use(config => {
 })
 
 spotifyEndpoint.interceptors.response.use(undefined, error => {
-  if (error.response.status === 401) {
-    appResetAuthorized()
-    router.push({ name: ROUTE_AUTHENTICATE })
+  try {
+    if (error.response.status === 401) {
+      appResetAuthorized()
+      router.push({ name: ROUTE_AUTHENTICATE })
+    }
+
+    logger.error(error, error.response, error.config)
+    uiSetError(error.response.data)
+  } catch (err) {
+    uiSetError('unknown')
+    logger.error('Encountered a non-api-error:', err)
   }
 
-  logger.error(error, error.response, error.config)
-  uiSetError(error.response.data)
   uiStopLoading()
-
   return Promise.reject(error)
 })
 

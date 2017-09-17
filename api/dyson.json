@@ -1,0 +1,5 @@
+{
+  "multiRequest": false,
+  "proxy": true,
+  "proxyHost": "https://api.spotify.com"
+}
