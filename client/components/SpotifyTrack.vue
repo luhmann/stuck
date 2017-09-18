@@ -9,7 +9,7 @@
     <div class="track__info">
       <div class="track__title" :title="name">{{ name }}</div>
       <div class="track__artist" :title="artistDisplayString">{{ artistDisplayString }}</div>
-      <a class="track__link" :href="externalUrl" target="_blank">View in Spotify</a>
+      <a class="track__link" :href="externalUrl" target="_blank" @click.stop>View in Spotify</a>
     </div>
     <div class="track__played-at" :title="dateDisplayString">{{ dateDisplayString }}</div>
     <sound-animation v-if="isPlaying" />
