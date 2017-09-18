@@ -45,6 +45,8 @@
 import { mapState } from 'vuex'
 import { getAuthorizationUrl } from '../api/urls'
 import { APP_NAME } from '../lib/env'
+import getRandom from '../lib/utils'
+import { SET_AUTHENTICATION_STATE } from '../store/mutation-types'
 
 import AppHeader from 'components/AppHeader'
 
@@ -56,7 +58,7 @@ export default {
   },
   computed: {
     authorizationUrl () {
-      return getAuthorizationUrl(APP_NAME)
+      return getAuthorizationUrl()
     },
     ...mapState({
       userAuthenticatedBefore: state => state.authentication.authenticatedBefore

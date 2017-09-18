@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
+import * as Cookies from 'js-cookie'
 
 import { isDev } from '../lib/env'
 import AuthenticationStore from './authentication-store'
@@ -20,6 +21,12 @@ const store = new Vuex.Store({
     createPersistedState({
       key: 'stuck',
       paths: ['authentication'],
+      storage: {
+        getItem: key => Cookies.get(key),
+        setItem: (key, value) =>
+          Cookies.set(key, value, { expires: 30, secure: false }),
+        removeItem: key => Cookies.remove(key),
+      },
     }),
   ],
 })

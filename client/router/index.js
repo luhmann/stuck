@@ -41,12 +41,17 @@ const router = new Router({
       beforeEnter: (to, from, next) => {
         if (to.hash) {
           const parsed = qs.parse(to.hash)
-          appSetAuthorized(
-            parsed.access_token,
-            Number(Date.now()) + parseInt(parsed.expires_in, 10) * 1000,
-            Number(Date.now())
-          )
-          next('/')
+          if (parsed.state === store.state.authentication.authenticationState) {
+            appSetAuthorized(
+              parsed.access_token,
+              Number(Date.now()) + parseInt(parsed.expires_in, 10) * 1000,
+              Number(Date.now())
+            )
+            next('/')
+          } else {
+            // Something does not add up redirect to authentication
+            next('/authenticate')
+          }
         }
       },
     },

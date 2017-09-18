@@ -1,9 +1,14 @@
-import { SET_AUTHENTICATION, RESET_AUTHENTICATION } from './mutation-types'
+import {
+  SET_AUTHENTICATION,
+  SET_AUTHENTICATION_STATE,
+  RESET_AUTHENTICATION,
+} from './mutation-types'
 
 const authenticationStore = {
   state: {
     authenticated: false,
     authenticatedBefore: false,
+    authenticationState: null,
     token: null,
     expires: null,
     requestedAt: null,
@@ -18,6 +23,9 @@ const authenticationStore = {
     },
     [RESET_AUTHENTICATION](state) {
       state.authenticated = false
+    },
+    [SET_AUTHENTICATION_STATE](state, payload) {
+      state.authenticationState = payload
     },
   },
   actions: {},
