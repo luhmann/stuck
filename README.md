@@ -16,4 +16,3 @@ Vue components
 * File Error by Adnen Kadri from the Noun Project
 * confused by Arthur Shlain from the Noun Project
 
-
