@@ -51,6 +51,10 @@ html[data-whatinput="mouse"] :focus {
     outline: none;
 }
 
+a {
+  color: var(--color-spotify);
+}
+
 body {
   background-color: var(--color-dark-bg);
   color: var(--color-text);

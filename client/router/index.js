@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import qs from 'query-string'
 
+import * as logger from '../lib/logger'
 import store from '../store/'
 import { appSetAuthorized } from '../store/common'
 import Authentication from '../views/Authentication'
@@ -50,6 +51,7 @@ const router = new Router({
             next('/')
           } else {
             // Something does not add up redirect to authentication
+            logger.error('Authentication state info did not match', parsed)
             next('/authenticate')
           }
         }

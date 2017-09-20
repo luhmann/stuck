@@ -24,7 +24,10 @@
             </li>
             <li>to save songs for you.</li>
           </ul>
-          Don't worry all communication is strictly between you and Spotify and you can revoke access at any time.
+          Don't worry all communication is strictly between you and Spotify and you can revoke access at any time on
+          the <a href="https://www.spotify.com/de/account/apps/">Apps Page</a> within Spotify. Just look for Stuck in
+          the app list and click the link on the right hand side to revoke access. If you ever want to use Stuck again
+          just come back here and hit the green button above.
         </p>
 
         <p class="hint-authenticated-before" v-if="userAuthenticatedBefore">
