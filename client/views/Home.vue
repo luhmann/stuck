@@ -4,7 +4,7 @@
     <Error v-if="hasError" />
     <Loading v-else-if="isLoading" />
     <Tracks v-else-if="recentTracks.length" />
-    <NoTracksYet v-else />
+    <no-tracks-yet v-else />
   </div>
 </template>
 

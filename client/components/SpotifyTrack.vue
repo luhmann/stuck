@@ -3,8 +3,8 @@
     class="track"
     @click="togglePreviewAudio"
   >
-    <LibraryButton :id="id" :class="{'is-invisible': !isLibraryLoaded}" />
-    <ResponsiveImage class="track__img" :images="images" v-if="images" :title="id" />
+    <library-button :id="id" :class="{'is-invisible': !isLibraryLoaded}" />
+    <responsive-image class="track__img" :images="images" v-if="images" :title="id" />
     <div class="track__img-placeholder" v-else></div>
     <div class="track__info">
       <div class="track__title" :title="name">{{ name }}</div>

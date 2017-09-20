@@ -14,7 +14,7 @@
         :now="now"
       ></spotify-track>
     </transition-group>
-    <NoMoreTracks />
+    <no-more-tracks />
     <audio-preview />
   </main>
 </template>
