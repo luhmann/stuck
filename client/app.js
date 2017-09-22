@@ -2,12 +2,20 @@ import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
 import svgicon from 'vue-svgicon'
 import VueProgressiveImage from 'vue-progressive-image'
+import Raven from 'raven-js'
+import RavenVue from 'raven-js/plugins/vue'
 
-import { isDev } from './lib/env'
+import { isDev, isProd } from './lib/env'
 import App from './components/App'
 import router from './router'
 import store from './store'
 import * as storeActions from './store/common'
+
+if (isProd()) {
+  Raven.config('https://24d65ea997af48d2b571cfd9bda075cd@sentry.io/220709')
+    .addPlugin(RavenVue, Vue)
+    .install()
+}
 
 sync(store, router)
 
