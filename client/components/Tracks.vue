@@ -22,7 +22,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import moment from '../lib/moment-wrapper'
-import { REQUEST_RECENT_TRACKS, POLL_RECENT_TRACKS } from '../store/action-types.js'
+import { POLL_RECENT_TRACKS } from '../store/action-types.js'
 import { ELAPSED_UPDATE_INTERVAL, POLLING_INTERVAL } from '../lib/env'
 
 import AudioPreview from 'components/AudioPreview'
@@ -33,18 +33,18 @@ export default {
   components: {
     AudioPreview,
     NoMoreTracks,
-    SpotifyTrack
+    SpotifyTrack,
   },
   data() {
     return {
-      now: moment()
+      now: moment(),
     }
   },
   mounted() {
     this.pollingInterval = setInterval(this.pollRecentTracks, POLLING_INTERVAL)
     this.nowInterval = setInterval(() => {
       this.now = moment()
-    }, ELAPSED_UPDATE_INTERVAL);
+    }, ELAPSED_UPDATE_INTERVAL)
   },
   destroyed() {
     clearInterval(this.pollingInterval)
@@ -53,31 +53,35 @@ export default {
   computed: {
     ...mapGetters({
       tracks: 'recentTracks',
-    })
+    }),
   },
   methods: {
-    pollRecentTracks () {
+    pollRecentTracks() {
       this.$store.dispatch(POLL_RECENT_TRACKS)
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style scoped>
-  main {
-    overflow: hidden;
-    position: relative;
-    z-index: var(--z-index-low);
-  }
+main {
+  overflow: hidden;
+  position: relative;
+  z-index: var(--z-index-low);
+}
 
-  .slide-fade-enter-active, .slide-fade-move {
-    transition: all 0.8s ease;
-  }
-  .slide-fade-leave-active {
-    transition: all 1.3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  }
-  .slide-fade-enter, .slide-fade-leave-to {
-    transform: translateX(10px);
-    opacity: 0;
-  }
+.slide-fade-enter-active,
+.slide-fade-move {
+  transition: all 0.8s ease;
+}
+
+.slide-fade-leave-active {
+  transition: all 1.3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}
 </style>

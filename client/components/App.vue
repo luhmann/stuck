@@ -25,6 +25,7 @@ export default {
   --color-dark-bg: rgb(25, 20, 20);
   --color-separator: rgb(83, 83, 83);
   --color-spotify: rgb(30, 215, 96);
+  --color-warning: rgba(225, 226, 36, 0.9);
   --color-bright-bg: rgb(249, 249, 249);
 
   --font-size-standard: 12px;

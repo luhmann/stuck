@@ -3,13 +3,16 @@
     :src="imageUrl"
     :srcset="srcset"
     sizes="(max-width: 375px) 64px, 208px"
+    :alt="altText"
+    :title="altText"
   />
 </template>
 
 <script>
 export default {
   props: [
-    'images'
+    'images',
+    'altText'
   ],
   computed: {
     imageUrl () {

@@ -11,33 +11,22 @@
       </section>
       <section class="dialog">
         <p>
-          Do you know that feeling of listening to Spotify for hours and have all those great songs just playing
-          by, but you cannot be bothered to save them to your library to not disturb your flow. Now you can jump back
-          in your Spotify history and revisit all those great moments. Keep what you like and forget what you don't.
+          Do you know that feeling of listening to Spotify for hours and have all those great songs just playing by, but you cannot be bothered to save them to your library to not disturb your flow. Now you can jump back in your Spotify history and revisit all those great moments. Keep what you like and forget what you don't.
         </p>
         <p>
           To get started you need to authenticate with Spotify and allow us:
           <ul>
             <li>
-               to access your Spotify library so we can retrieve your recently played songs and determine which ones
-               you already saved
+              to access your Spotify library so we can retrieve your recently played songs and determine which ones you already saved
             </li>
             <li>to save songs for you.</li>
           </ul>
-          Don't worry all communication is strictly between you and Spotify and you can revoke access at any time on
-          the <a href="https://www.spotify.com/de/account/apps/">Apps Page</a> within Spotify. Just look for Stuck in
-          the app list and click the link on the right hand side to revoke access. If you ever want to use Stuck again
-          just come back here and hit the green button above.
+          Don't worry all communication is strictly between you and Spotify and you can revoke access at any time on the
+          <a href="https://www.spotify.com/de/account/apps/">Apps Page</a> within Spotify. Just look for Stuck in the app list and click the link on the right hand side to revoke access. If you ever want to use Stuck again just come back here and hit the green button above.
         </p>
 
         <p class="hint-authenticated-before" v-if="userAuthenticatedBefore">
-          Why do I see this again?
-
-          Spotify only grants sessions that last an hour for their app.
-          So if you last authenticated more than an hour ago, you need to authenticate again.
-          It should be quick.
-
-          Sorry for the inconvenience!
+          Why do I see this again? Spotify only grants sessions that last an hour for their app. So if you last authenticated more than an hour ago, you need to authenticate again. It should be quick. Sorry for the inconvenience!
         </p>
       </section>
     </main>
@@ -47,34 +36,31 @@
 <script>
 import { mapState } from 'vuex'
 import { getAuthorizationUrl } from '../api/urls'
-import { APP_NAME } from '../lib/env'
-import getRandom from '../lib/utils'
-import { SET_AUTHENTICATION_STATE } from '../store/mutation-types'
 
 import AppHeader from 'components/AppHeader'
 
 export default {
-  created () {
+  created() {
     if (this.userAuthenticatedBefore) {
       window.location.replace(this.authorizationUrl)
     }
   },
   computed: {
-    authorizationUrl () {
+    authorizationUrl() {
       return getAuthorizationUrl()
     },
     ...mapState({
-      userAuthenticatedBefore: state => state.authentication.authenticatedBefore
-    })
+      userAuthenticatedBefore: state =>
+        state.authentication.authenticatedBefore,
+    }),
   },
   components: {
-    AppHeader
+    AppHeader,
   }
 }
 </script>
 
 <style lang="postcss" scoped>
-
 .root {
   display: grid;
   min-height: 100vh;

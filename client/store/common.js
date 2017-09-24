@@ -1,6 +1,8 @@
 import {
   SET_UI_ERROR,
+  CLEAR_UI_ERROR,
   SET_UI_LOADING,
+  SET_UI_INITIALIZED,
   SET_AUTHENTICATION,
   SET_REQUEST_IN_PROGRESS,
   RESET_AUTHENTICATION,
@@ -15,12 +17,16 @@ const uiStopLoading = () => {
   store.commit(SET_UI_LOADING, false)
 }
 
+const uiSetInitialized = () => {
+  store.commit(SET_UI_INITIALIZED)
+}
+
 const uiSetError = err => {
   store.commit(SET_UI_ERROR, err)
 }
 
 const uiClearError = () => {
-  store.commit(SET_UI_ERROR, null)
+  store.commit(CLEAR_UI_ERROR)
 }
 
 const requestInProgress = stateSlice => {
@@ -54,6 +60,7 @@ export {
   appResetAuthorized,
   requestInProgress,
   requestCompleted,
+  uiSetInitialized,
   uiStartLoading,
   uiStopLoading,
   uiSetError,

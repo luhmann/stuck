@@ -24,6 +24,7 @@ import {
 import {
   requestInProgress,
   requestCompleted,
+  uiSetInitialized,
   uiStartLoading,
   uiStopLoading,
 } from './common'
@@ -85,13 +86,16 @@ const spotifyStore = {
   actions: {
     [POLL_RECENT_TRACKS]({ commit, dispatch, getters }) {
       playerResource
-        .getRecentTracks(getters.recentTracksCursors.after)
+        .getRecentTracks(getters.recentTracksCursors.after, null, false)
         .then(recentTracks => {
           commit(UPDATE_RECENT_TRACKS, recentTracks)
           dispatch(
             REQUEST_LIBRARY_CONTAINS,
             recentTracks.items.map(item => item.track.id)
           )
+        })
+        .catch(err => {
+          logger.info(err)
         })
     },
     [REQUEST_RECENT_TRACKS]({ commit, dispatch, getters }) {
@@ -115,7 +119,9 @@ const spotifyStore = {
           )
           requestCompleted('recentTracks')
           uiStopLoading()
+          uiSetInitialized()
         })
+        .catch(err => logger.info(err))
     },
     [REQUEST_LIBRARY_CONTAINS]({ commit, getters }, trackIds) {
       if (trackIds.length !== 0) {

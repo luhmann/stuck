@@ -3,14 +3,30 @@
     <svgicon class="logo" icon="ribbon" width="30" height="50" />
     <svgicon icon="logo" width="110" height="52" />
     <img class="spotify-icon" src="/spotify_icon.png" alt="Spotify Logo" title="powered by" />
+    <transition name="fade">
+      <no-network-indicator v-if="hasNoNetwork && isInitialized" />
+    </transition>
   </header>
 </template>
 
 <script>
+import { mapGetters, mapState } from 'vuex'
+import NoNetworkIndicator from './NoNetworkIndicator'
+
 import './icons'
 
 export default {
-
+  components: {
+    NoNetworkIndicator,
+  },
+  computed: {
+    ...mapState({
+      isInitialized: ({ ui }) => ui.isInitialized,
+    }),
+    ...mapGetters({
+      hasNoNetwork: 'hasNoNetwork'
+    }),
+  },
 }
 </script>
 
@@ -46,5 +62,12 @@ export default {
   justify-self: flex-end;
   margin-right: 12px;
   width: 40px;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0
 }
 </style>

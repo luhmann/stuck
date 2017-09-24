@@ -3,7 +3,7 @@ import qs from 'query-string'
 import store from '../store/'
 import { SET_AUTHENTICATION_STATE } from '../store/mutation-types'
 import { isDev } from '../lib/env'
-import getRandom from '../lib/utils'
+import { getRandom } from '../lib/utils'
 
 const BASE_URL = isDev() ? 'http://svo.dev:4000' : 'http://stuck.luhmann.me'
 

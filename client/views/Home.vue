@@ -1,10 +1,10 @@
 <template>
   <div>
     <app-header />
-    <Error v-if="hasError" />
+    <Error v-if="hasError || (hasNoNetwork && !isInitialized)" />
     <Loading v-else-if="isLoading" />
     <Tracks v-else-if="recentTracks.length" />
-    <no-tracks-yet v-else />
+    <no-tracks-yet v-else-if="isInitialized" />
   </div>
 </template>
 
@@ -35,8 +35,9 @@ export default {
     ...mapState({
       areRecentTracksLoaded: ({ spotify }) => spotify.recentTracks.loaded,
       isLoading: ({ ui }) => ui.isLoading,
+      isInitialized: ({ ui }) => ui.isInitialized,
     }),
-    ...mapGetters(['isAuthenticated', 'hasError', 'recentTracks'])
+    ...mapGetters(['isAuthenticated', 'hasError', 'recentTracks', 'hasNoNetwork'])
   },
   methods: {
     requestRecentTracks () {

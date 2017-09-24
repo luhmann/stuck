@@ -23,6 +23,7 @@ const authenticationStore = {
     },
     [RESET_AUTHENTICATION](state) {
       state.authenticated = false
+      state.authenticationState = null
     },
     [SET_AUTHENTICATION_STATE](state, payload) {
       state.authenticationState = payload

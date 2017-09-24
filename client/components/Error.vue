@@ -1,7 +1,8 @@
 <template>
   <main class="error-bg">
     <div class="error-msg">
-      <svgicon class="error-icon" icon="error" height="40" width="40" />
+      <svgicon class="error-icon" v-if="!isNetworkError" icon="error" height="40" width="40" />
+      <svgicon class="error-icon" v-if="isNetworkError" icon="nonetwork" height="40" width="40" />
       {{ errorMessage }}
     </div>
   </main>
@@ -9,6 +10,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
+
+import {
+  UI_ERROR_DEFAULT,
+  UI_ERROR_NETWORK,
+  UI_ERROR_RATE_LIMIT,
+  UI_ERROR_SPOTIFY_DOWN
+} from '../store/ui-store'
 
 const defaultErrorMessage = `
   Oh no, something went wrong. We are sorry for that. It might be a temporary issue, please try again later
@@ -25,18 +33,15 @@ const rateLimitErrorMessage = `
   This is a temporary problem however. Please try again later.
 `
 
+const networkDownErrorMessage = `
+  We could not establish a network connection. Please connect to a network and retry.
+`
+
 const errorMessageMap = new Map([
-  [400, defaultErrorMessage],
-  [401, defaultErrorMessage],
-  [402, defaultErrorMessage],
-  [404, defaultErrorMessage],
-  [429, rateLimitErrorMessage],
-  [500, spotifyDownErrorMessage],
-  [501, spotifyDownErrorMessage],
-  [502, spotifyDownErrorMessage],
-  [503, spotifyDownErrorMessage],
-  [504, spotifyDownErrorMessage],
-  [505, spotifyDownErrorMessage],
+  [UI_ERROR_DEFAULT, defaultErrorMessage],
+  [UI_ERROR_RATE_LIMIT, rateLimitErrorMessage],
+  [UI_ERROR_SPOTIFY_DOWN, spotifyDownErrorMessage],
+  [UI_ERROR_NETWORK, networkDownErrorMessage],
 ])
 
 export default {
@@ -44,10 +49,13 @@ export default {
     ...mapGetters(['errorDetails']),
     errorMessage() {
       try {
-        return errorMessageMap.get(this.errorDetails.error.status) || defaultErrorMessage
+        return errorMessageMap.get(this.errorDetails.type) || defaultErrorMessage
       } catch (err) {
         return defaultErrorMessage
       }
+    },
+    isNetworkError() {
+      return this.errorDetails.type === UI_ERROR_NETWORK
     }
   }
 }

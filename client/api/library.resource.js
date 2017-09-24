@@ -1,21 +1,33 @@
 import spotifyEndpoint from './common'
 import { LIBRARY_SAVED_TRACKS_CONTAIN, LIBRARY_TRACKS } from './urls'
 
-const checkLibraryContains = (trackIds = []) =>
+const checkLibraryContains = (trackIds = [], userInitiated = true) =>
   spotifyEndpoint
     .get(LIBRARY_SAVED_TRACKS_CONTAIN, {
+      meta: {
+        userInitiated,
+      },
       params: {
         ids: trackIds.join(','),
       },
     })
     .then(response => response.data)
 
-const saveTracksToLibrary = (trackIds = []) =>
-  spotifyEndpoint.put(LIBRARY_TRACKS, trackIds).then(response => response.data)
+const saveTracksToLibrary = (trackIds = [], userInitiated = true) =>
+  spotifyEndpoint
+    .put(LIBRARY_TRACKS, trackIds, {
+      meta: {
+        userInitiated,
+      },
+    })
+    .then(response => response.data)
 
-const removeTracksFromLibrary = (trackIds = []) =>
+const removeTracksFromLibrary = (trackIds = [], userInitiated = true) =>
   spotifyEndpoint
     .delete(LIBRARY_TRACKS, {
+      meta: {
+        userInitiated,
+      },
       params: {
         ids: trackIds.join(','),
       },

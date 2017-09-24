@@ -15,4 +15,4 @@ Vue components
 * Caleb Woods for great photography: https://unsplash.com/photos/vHvUqnt31wU
 * File Error by Adnen Kadri from the Noun Project
 * confused by Arthur Shlain from the Noun Project
-
+* Disconnected plug by Lakshisha from the Noun Project
