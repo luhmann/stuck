@@ -4,7 +4,7 @@
     @click="togglePreviewAudio"
   >
     <library-button :id="id" :class="{'is-invisible': !isLibraryLoaded}" />
-    <responsive-image class="track__img" :images="images" v-if="images" :title="id" />
+    <responsive-image class="track__img" :images="images" v-if="images" :altText="altText" />
     <div class="track__img-placeholder" v-else></div>
     <div class="track__info">
       <div class="track__title" :title="name">{{ name }}</div>
@@ -45,6 +45,9 @@ export default {
     ...mapState({ isLibraryLoaded: ({ spotify }) => spotify.library.loaded }),
     artistDisplayString() {
       return this.artists.map(artist => artist.name).join(', ')
+    },
+    altText() {
+      return `${this.artistDisplayString} - ${this.name}`
     },
     dateDisplayString() {
       return moment(this.date).from(this.now)
