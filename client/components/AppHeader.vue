@@ -2,7 +2,7 @@
   <header class="header">
     <svgicon class="logo" icon="ribbon" width="30" height="50" />
     <svgicon icon="logo" width="110" height="52" />
-    <img class="spotify-icon" src="/spotify_icon.png" alt="Spotify Logo" title="powered by" />
+    <img class="spotify-icon" src="/spotify_icon_white.png" alt="Spotify Logo" title="powered by" />
     <transition name="fade">
       <no-network-indicator v-if="hasNoNetwork && isInitialized" />
     </transition>
