@@ -2,7 +2,7 @@
   <div>
     <button class="library-action library-action--added" v-if="isTrackInLibrary(id)" @click.stop="removeTrack(id)">
       <svgicon class="library-action__icon--added" icon="added" width="20" height="20" />
-      <svgicon class="library-action__icon--delete" icon="delete" width="18" height="18" />
+      <svgicon class="library-action__icon--delete" icon="delete" width="20" height="20" />
     </button>
     <button class="library-action library-action--add" title="Save to your music library" v-else @click.stop="saveTrack(id)">
       <svgicon icon="add" color="#fff" width="100%" height="100%" />
@@ -63,6 +63,7 @@ export default {
   }
 
   svg.library-action__icon--delete {
-    display: none
+    display: none;
+    margin-left: 6px;
   }
 </style>
