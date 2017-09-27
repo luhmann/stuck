@@ -12,7 +12,9 @@ import store from './store'
 import * as storeActions from './store/common'
 
 if (isProd()) {
-  Raven.config('https://24d65ea997af48d2b571cfd9bda075cd@sentry.io/220709')
+  Raven.config('https://24d65ea997af48d2b571cfd9bda075cd@sentry.io/220709', {
+    release: '0001',
+  })
     .addPlugin(RavenVue, Vue)
     .install()
 }
