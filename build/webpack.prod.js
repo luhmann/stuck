@@ -63,7 +63,8 @@ base.plugins.push(
     ServiceWorker: {
       events: true,
     },
-  })
+  }),
+  new webpack.EnvironmentPlugin(['TRAVIS_COMMIT'])
 )
 
 // extract css in standalone css files
